@@ -12,7 +12,7 @@ Declare Function GetWindowRect Lib "user32" (ByVal hwnd As Long, _
    lpRect As RECT) As Long
 
 Declare Function MoveWindow Lib "user32" (ByVal hwnd As Long, _
-   ByVal X As Long, ByVal y As Long, ByVal nWidth As Long, _
+   ByVal x As Long, ByVal y As Long, ByVal nWidth As Long, _
    ByVal nHeight As Long, ByVal bRepaint As Long) As Long
 
 Declare Function GetDesktopWindow Lib "user32" () As Long

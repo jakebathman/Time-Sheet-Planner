@@ -5,6 +5,8 @@ Public YesNo As Variant
 Sub clearstuff()
 
     Dim i As Integer
+    Dim t
+    Dim x#
 
     With frmWorking
         .Show False
@@ -15,8 +17,6 @@ Sub clearstuff()
         .Label2.Caption = vbNullString
     End With
 
-    Dim t
-
     Call UpdateWorkingForm
 
     Call MaintenanceAndRepair
@@ -25,7 +25,7 @@ Sub clearstuff()
 
     YesNo = MsgBox("Really clear your inputted time below?", vbOKCancel)
 
-    If YesNo <> vbOK Then Exit Sub
+    If YesNo <> vbOK Then Unload frmWorking: Exit Sub
     Application.ScreenUpdating = False
 
     Dim boolOverwriteBackup
@@ -110,26 +110,44 @@ Sub clearstuff()
     Sheets("Time Sheet Planner").Activate
 
     If YesNo = vbOK Then
-        For i = 2 To 11
-            If i <> 10 Then
-                For j = 3 To 13 Step 2
-                    Call UpdateWorkingForm((((i - 1) / 10) + (((j - 2) / 11) / 10)) * 100)
-                    'Sheets("Time Sheet Planner").Cells(j, i).Activate
-                    With Sheets("Time Sheet Planner").Cells(j, i)    'no fill
-                        .Value = ""
-                        If i <> 11 Then
-                            .Interior.Pattern = xlNone
-                            .Interior.TintAndShade = 0
-                            .Interior.PatternTintAndShade = 0
-                        End If
-                        On Error Resume Next
-                        .Comment.Delete
-                        On Error GoTo ErrHandlerCode
-                    End With
-                Next j
-                Call UpdateWorkingForm
-            End If
-        Next i
+        Call UpdateWorkingForm(25)
+        With Sheets("Time Sheet Planner").Range("B3:I14")
+            .Value = ""
+            .Interior.Pattern = xlNone
+            .Interior.TintAndShade = 0
+            .Interior.PatternTintAndShade = 0
+            Call UpdateWorkingForm(30)
+            x = 30
+            t = Timer
+            While Timer < t + 0.45
+                Call UpdateWorkingForm(x)
+                x = x + 0.05
+                'Debug.Print x
+                DoEvents
+            Wend
+
+            On Error Resume Next
+            .Comment.Delete
+            On Error GoTo ErrHandlerCode
+        End With
+        With Sheets("Time Sheet Planner").Range("K3:K14")
+            .Value = ""
+            .Interior.Pattern = xlNone
+            .Interior.TintAndShade = 0
+            .Interior.PatternTintAndShade = 0
+            Call UpdateWorkingForm(30)
+            t = Timer
+            While Timer < t + 0.15
+                Call UpdateWorkingForm(x)
+                x = x + 0.05
+                'Debug.Print x
+                DoEvents
+            Wend
+
+            On Error Resume Next
+            .Comment.Delete
+            On Error GoTo ErrHandlerCode
+        End With
         Sheets(1).Cells(23, 2).Activate
         Sheets(1).Cells(23, 2) = ""
     Else
@@ -137,7 +155,7 @@ Sub clearstuff()
         End
     End If
 
-    Call UpdateWorkingForm
+    Call UpdateWorkingForm(75)
 
     With Cells(17, 2)
         .Value = ""
@@ -145,15 +163,20 @@ Sub clearstuff()
         .Interior.TintAndShade = 0
         .Interior.PatternTintAndShade = 0
     End With
-    Call UpdateWorkingForm
-    Call UpdateWorkingForm
+            While Timer < t + 0.1
+                Call UpdateWorkingForm(x)
+                x = x + 0.04
+                Debug.Print x
+                DoEvents
+            Wend
 
     Cells(3, 2).Select
+    Call UpdateWorkingForm
 
     Application.ScreenUpdating = True
     Application.EnableEvents = True
 
-    Call UpdateWorkingForm
+    Call UpdateWorkingForm(100)
 
 
     Dim boolRestoreBackup
@@ -163,7 +186,6 @@ Sub clearstuff()
                              & vbCrLf & vbCrLf & "Yes: Keep changes to main sheet and delete backup." _
                              & vbCrLf & "No: Restore my old stuff (Undo clearing data)." _
                              & vbCrLf & vbCrLf & "(WARNING! Any action is not reversible.)", vbYesNo)
-    Call UpdateWorkingForm
 
     Select Case boolRestoreBackup
         Case vbYes
@@ -178,9 +200,7 @@ Sub clearstuff()
             Sheets("Backup of Time Sheet Planner").Name = "Time Sheet Planner"
             Application.DisplayAlerts = True
     End Select
-    Call UpdateWorkingForm
 
-    Unload frmWorking
 
 ErrHandlerCode:
     If Err.Number <> 0 Then

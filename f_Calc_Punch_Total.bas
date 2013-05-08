@@ -103,14 +103,14 @@ End Function
 
 
 
-Public Function Ceiling(ByVal X As Double, Optional ByVal Factor As Double = 1) As Double
+Public Function Ceiling(ByVal x As Double, Optional ByVal Factor As Double = 1) As Double
 ' X is the value you want to round
 ' is the multiple to which you want to round
-    Ceiling = (Int(X / Factor) - (X / Factor - Int(X / Factor) > 0)) * Factor
+    Ceiling = (Int(x / Factor) - (x / Factor - Int(x / Factor) > 0)) * Factor
 End Function
 
-Public Function Floor(ByVal X As Double, Optional ByVal Factor As Double = 1) As Double
+Public Function Floor(ByVal x As Double, Optional ByVal Factor As Double = 1) As Double
 ' X is the value you want to round
 ' is the multiple to which you want to round
-    Floor = Int(X / Factor) * Factor
+    Floor = Int(x / Factor) * Factor
 End Function

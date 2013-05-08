@@ -2,7 +2,7 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "Sheet43"
+Attribute VB_Name = "Sheet46"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -100,25 +100,27 @@ Sub Worksheet_Change(ByVal Target As Range)
         Application.EnableEvents = False
         Range(Target.Address) = ""
         Application.EnableEvents = True
-        If Len(strTimeInput) = 4 Then
-            'If Left(strTimeInput, 2) = "12" Or Left(strTimeInput, 2) = "11" Or Left(strTimeInput, 2) = "10" Then
-            dblTimeOutput = ((CDbl(Left(strTimeInput, 2)) + intAdjustor) / 24) + (((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 2400)
-            'Else
-            'dblTimeOutput = ((CDbl(Left(strTimeInput, 2)) - 12) / 24) + (CDbl(Right(strTimeInput, 2)) / 2400)
-            'End If
-        ElseIf Len(strTimeInput) = 3 Then
-            dblTimeOutput = ((CDbl(Left(strTimeInput, 1)) + intAdjustor) / 24) + (((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 2400)
-        ElseIf Len(strTimeInput) = 2 Then
-            If CDbl(strTimeInput) > 24 Then Target.Value = "": GoTo EndOfSub Else dblTimeOutput = ((CDbl(strTimeInput) + intAdjustor) / 24)
-        ElseIf Len(strTimeInput) = 1 Then
-            dblTimeOutput = ((CDbl(strTimeInput) + intAdjustor) / 24)
-        End If
+        Select Case Len(strTimeInput)
+            Case Is = 6
+                dblTimeOutput = ((CDbl(Left(strTimeInput, 2)) + intAdjustor) / 24) + (((CDbl(Mid(strTimeInput, 3, 2)) * 100) / 60) / 2400) + ((((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 60) / 2400)
+            Case Is = 5
+                dblTimeOutput = ((CDbl(Left(strTimeInput, 1)) + intAdjustor) / 24) + (((CDbl(Mid(strTimeInput, 2, 2)) * 100) / 60) / 2400) + ((((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 60) / 2400)
+            Case Is = 4
+                dblTimeOutput = ((CDbl(Left(strTimeInput, 2)) + intAdjustor) / 24) + (((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 2400)
+            Case Is = 3
+                dblTimeOutput = ((CDbl(Left(strTimeInput, 1)) + intAdjustor) / 24) + (((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 2400)
+            Case Is = 2
+                If CDbl(strTimeInput) > 24 Then Target.Value = "": GoTo EndOfSub Else dblTimeOutput = ((CDbl(strTimeInput) + intAdjustor) / 24)
+            Case Is = 1
+                dblTimeOutput = ((CDbl(strTimeInput) + intAdjustor) / 24)
+        End Select
+
 
 AdjustorCode:
         If Target.Column <> 2 Then
             Dim dblRowMax#
             dblRowMax = Application.WorksheetFunction.Max(Range(Cells(Target.Row, 2), Cells(Target.Row, Target.Column)))
-            If dblTimeOutput < dblRowMax Then
+            If dblTimeOutput <= dblRowMax Or (Target.Column = 5 And dblTimeOutput >= dblRowMax) Then
                 dblTimeOutput = dblTimeOutput + 0.5
             End If
         End If

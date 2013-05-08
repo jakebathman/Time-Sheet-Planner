@@ -731,27 +731,27 @@ Next i
 '  37.5<= x < 52.5  = 45
 '  52.5<= x <=60    = 00, next hour
 
-Dim X#
+Dim x#
 Dim intHrs As Integer
 Dim intMin As Integer
 
 'round existing, inserting rounded decimal time into array(i,5) as #
 For i = 1 To intAllArrayLengths
     intMin = arrExistingCalculatedPunches(i, 3)
-    X = intMin + (arrExistingCalculatedPunches(i, 4) / 60)
+    x = intMin + (arrExistingCalculatedPunches(i, 4) / 60)
     intHrs = arrExistingCalculatedPunches(i, 2)
     If arrExistingCalculatedPunches(i, 1) = "" Then
         'foo
     Else
-        If (X >= 0 And X < 7.5) Then '00
+        If (x >= 0 And x < 7.5) Then '00
             arrExistingCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs, 0)
-        ElseIf (X >= 7.5 And X < 22.5) Then '15
+        ElseIf (x >= 7.5 And x < 22.5) Then '15
             arrExistingCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs, 15)
-        ElseIf (X >= 22.5 And X < 37.5) Then '30
+        ElseIf (x >= 22.5 And x < 37.5) Then '30
             arrExistingCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs, 30)
-        ElseIf (X >= 37.5 And X < 52.5) Then '45
+        ElseIf (x >= 37.5 And x < 52.5) Then '45
             arrExistingCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs, 45)
-        ElseIf (X >= 52.5 And X <= 60) Then ' 00, next hour
+        ElseIf (x >= 52.5 And x <= 60) Then ' 00, next hour
             arrExistingCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs + 1, 0)
         End If
     End If
@@ -760,20 +760,20 @@ For i = 1 To intAllArrayLengths
     'repeat above code
 
     intMin = arrSortedCalculatedPunches(i, 3)
-    X = intMin + (arrSortedCalculatedPunches(i, 4) / 60)
+    x = intMin + (arrSortedCalculatedPunches(i, 4) / 60)
     intHrs = arrSortedCalculatedPunches(i, 2)
     If arrSortedCalculatedPunches(i, 1) = "" Then
         'foo
     Else
-        If (X >= 0 And X < 7.5) Then '00
+        If (x >= 0 And x < 7.5) Then '00
             arrSortedCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs, 0)
-        ElseIf (X >= 7.5 And X < 22.5) Then '15
+        ElseIf (x >= 7.5 And x < 22.5) Then '15
             arrSortedCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs, 15)
-        ElseIf (X >= 22.5 And X < 37.5) Then '30
+        ElseIf (x >= 22.5 And x < 37.5) Then '30
             arrSortedCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs, 30)
-        ElseIf (X >= 37.5 And X < 52.5) Then '45
+        ElseIf (x >= 37.5 And x < 52.5) Then '45
             arrSortedCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs, 45)
-        ElseIf (X >= 52.5 And X <= 60) Then ' 00, next hour
+        ElseIf (x >= 52.5 And x <= 60) Then ' 00, next hour
             arrSortedCalculatedPunches(i, 5) = MakeTimeDecimal(intHrs + 1, 0)
         End If
     End If
