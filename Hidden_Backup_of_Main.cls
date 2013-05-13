@@ -120,7 +120,7 @@ AdjustorCode:
         If Target.Column <> 2 Then
             Dim dblRowMax#
             dblRowMax = Application.WorksheetFunction.Max(Range(Cells(Target.Row, 2), Cells(Target.Row, Target.Column)))
-            If dblTimeOutput <= dblRowMax Or (Target.Column = 5 And dblTimeOutput >= dblRowMax) Then
+            If dblTimeOutput <= dblRowMax Or (Target.Column = 5 And dblTimeOutput >= dblRowMax And dblTimeOutput < 0.41666) Then ' only auto-PMs OUT times less than 10:00
                 dblTimeOutput = dblTimeOutput + 0.5
             End If
         End If
