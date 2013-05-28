@@ -39,9 +39,106 @@
         <ul></ul>
       </nav>
       <section>
-        <h1>Time-Sheet-Planner</h1>
+        <h3>Time-Sheet-Planner</h3>
 
-<p>This is a tool used internally at Collin County HLS to manage PeopleSoft time for employees. The current version is v6.4 which can be downloaded from the yellow bar above.</p>
+<p>This is a tool used internally at Collin County HLS to manage PeopleSoft time for employees. The current version is v6.4 which can be downloaded here: <a href="http://www.jakebathman.com/work/timesheetplanner">http://www.jakebathman.com/work/timesheetplanner</a></p>
+
+<h1></h1>
+
+<h3>Changelog</h3>
+
+<p><strong>v7.0 (unreleased)</strong></p>
+
+<ul>
+<li>Added Supervisor sheet for calculating by pay period</li>
+<li>Added code to GitHub, which will track all issues and the changelog from now on: <a href="https://github.com/jakebathman/Time-Sheet-Planner">https://github.com/jakebathman/Time-Sheet-Planner</a>
+</li>
+</ul><p><strong>v6.5 Beta (unreleased)</strong></p>
+
+<ul>
+<li>To-Do: Fix PeopleSoft importing (maybe add web browser or refreshable web query?)</li>
+<li>To-Do: Fix last punch estimator (not showing up anymore, because formulas point to blank hidden rows)</li>
+<li>To-Do:    Remove references to hidden rows in code, and delete those rows</li>
+<li>Fixed lingering progress bar when cancelling the clearing of a sheet</li>
+<li>Changed how the Clear Times sub works, since we don't care about the hidden rows anymore (simply clears a range of cells now, instead of slowly looping)</li>
+<li>Added Sunday to the timesheet (even though it's rarely used)</li>
+<li>To-Do:    Automatically email about time off needed to be entered, if any exists (only for full-weeks? Figure out how to calculate)</li>
+<li>To-Do:    If entering afternoon (last punch) in a row, make it PM if it looks like it should be</li>
+<li>Times with seconds can now be entered without punctuation (e.g. 12:22:46 can be entered as 122246 and will format correctly)</li>
+<li>Times entered in OUT column are assumed to be PM and a final (night) punch</li>
+</ul><p><strong>v6.4 RC (released 1/7/2013)</strong></p>
+
+<ul>
+<li>Added prompt on PeopleSoft Importer notifying user that it's currently broken</li>
+</ul><p><strong>v6.3 RC (released 12/10/2012)</strong></p>
+
+<ul>
+<li>Adjusted Clear Times sub to remove comments, which could incorrectly report previously imported PeopleSoft times</li>
+<li>Re-wrote adding code, which is all done in the background and doesn't use (breakable) sheet formulas</li>
+<li>Slightly revised Clear Times sub to run faster and with less screen flicker</li>
+</ul><p><strong>v6.2 RC (released 05/29/2012)</strong></p>
+
+<ul>
+<li>Added "working" form to Clear Times button</li>
+<li>Fixed bug where some subs wouldn't heed command to not show application alerts, which resulted in user confusion</li>
+<li>Hidden working sub now included, which will eventually process PeopleSoft HTML code for timesheet import</li>
+<li>After clearing times on main page, active cell now returns to Monday's first punch </li>
+</ul><p><strong>v6.2 beta (released 02/10/2012)</strong></p>
+
+<ul>
+<li>Revised pre-populated list of names/emails for emailling times based on staff turnover</li>
+<li>Fixed bug in Email sub that halted when no Outlook signature file existed (based on font and font size)</li>
+<li>Fixed bug in VBA references when running on older versions of Office (removed superfluous references)</li>
+<li>Added error catching code in Email sub, prompting with a more descriptive (and user-friendly) error message</li>
+</ul><p><strong>v6.1 beta (released 11/03/2011)</strong></p>
+
+<ul>
+<li>Fixed Bug: Importing from PeopleSoft was not possible when using any browser other than Chrome</li>
+<li>Fixed Bug: Various input revision bugs when inputting directly to sheet (not using military time)</li>
+<li>Fixed: (v.6) New Bug: adding an OUT time should check to see if it's after the IN time, and adjust to military accordingly (e.g. 5--&gt;1700)</li>
+<li>Fixed Bug: Inputting times directly to sheet using two digits over 24 rolls over to future days (fix: disallow and blank &gt;24 inputs)</li>
+<li>Added: highlight (faint) those times that were either new or confirmed with PeopleSoft imports (cleared as well). Should retain between edits.</li>
+<li>Fixed Bug: adding/deleting additional names and emails inside email times routine is now more robust</li>
+<li>Added: when running PeopleSoft importer, now checks for open window with timesheet. If not, prompts to open timesheet URL</li>
+<li>Fixed: (v.6) New Bug: Highlighting times in email script does not work, sometimes highlights header values</li>
+<li>New Bug: Too much screen flicker (probably because of poorly-placed Application.ScreenUpdating commands)</li>
+</ul><p><strong>v6.0 beta (released 10/24/2011)</strong></p>
+
+<ul>
+<li>Beta release of PeopleSoft importer</li>
+<li>Allows inputting of times in sheet in military time without : seperator (e.g., 1300, 13, 13:00, 13.00 all convert to 1:00:00 PM)</li>
+<li>Beta release of button to email times to someone</li>
+<li>New Bug: Midnight times are not converted correctly if : seperator is not used (fix: look for hrs&gt;24)</li>
+<li>New Bug: Highlighting times in email script does not work, sometimes highlights header values</li>
+<li>New Bug: adding an OUT time should check to see if it's after the IN time, and adjust to military accordingly (e.g. 5--&gt;1700)</li>
+<li>Fixed Bug: selecting multiple options in user prefs now disallowed; part time employees added, new comp time forumla in sheet</li>
+</ul><p><strong>v5.0 (released 8/15/2011)</strong>  </p>
+
+<ul>
+<li>Updated example sheet to reflect new planner</li>
+<li>Added button on main sheet to clear previous times (uses macro)</li>
+</ul><p><strong>v4.0 (released 4/29/2011)</strong>  </p>
+
+<ul>
+<li>Began changelog</li>
+<li>Fixed bug that could prevent Friday punch helper from appearing</li>
+<li>Added formula in Friday punch helper that will make automatic 1-hour lunch more obvious to user</li>
+<li>Added time code for holiday hours</li>
+<li>Fixed bug that could incorrectly report the number of incorrect or missing timecodes for time off</li>
+</ul><h1></h1>
+
+<h3>Task list for future development</h3>
+
+<ul>
+<li>Test and refine PeopleSoft importer</li>
+<li>PS Importer currently discards (ignores) time off values</li>
+<li>Update conflict resolution to include ability to move punches (for missing IN PS punches)</li>
+<li>Decrease number of prompts to user; become more autonomous</li>
+<li>Eventually fully automate calculations, instead of using hidden cells</li>
+<li>Re-work design and layout to be easier to understand (less big blocks of text)</li>
+<li>Adjust last-punch calculator to be VBA, include all contingencies and proper trigger for showing</li>
+<li>Make auto-round of PeopleSoft times a user-selectable option (default rounded)</li>
+</ul>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/jakebathman">jakebathman</a></p>
