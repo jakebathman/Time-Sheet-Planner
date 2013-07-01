@@ -2,7 +2,7 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "Sheet46"
+Attribute VB_Name = "Sheet45"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -96,40 +96,19 @@ Sub Worksheet_Change(ByVal Target As Range)
 
 
         Dim intAdjustor As Integer
-        Dim strH$, strM$, strS$
         intAdjustor = 0
         Application.EnableEvents = False
         Range(Target.Address) = ""
         Application.EnableEvents = True
         Select Case Len(strTimeInput)
             Case Is = 6
-                strH = Left(strTimeInput, 2)
-                strM = Mid(strTimeInput, 3, 2)
-                strS = Right(strTimeInput, 2)
-                dblTimeOutput = ((CDbl(strH) + intAdjustor) / 24) + (((CDbl(strM) * 100) / 60) / 2400) + ((((CDbl(strS) * 100) / 60) / 60) / 2400)
+                dblTimeOutput = ((CDbl(Left(strTimeInput, 2)) + intAdjustor) / 24) + (((CDbl(Mid(strTimeInput, 3, 2)) * 100) / 60) / 2400) + ((((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 60) / 2400)
             Case Is = 5
-                strH = Left(strTimeInput, 1)
-                strM = Mid(strTimeInput, 1, 2)
-                strS = Right(strTimeInput, 2)
-                dblTimeOutput = ((CDbl(strH) + intAdjustor) / 24) + (((CDbl(strM) * 100) / 60) / 2400) + ((((CDbl(strS) * 100) / 60) / 60) / 2400)
+                dblTimeOutput = ((CDbl(Left(strTimeInput, 1)) + intAdjustor) / 24) + (((CDbl(Mid(strTimeInput, 2, 2)) * 100) / 60) / 2400) + ((((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 60) / 2400)
             Case Is = 4
-                strH = Left(strTimeInput, 2)
-                strM = Right(strTimeInput, 2)
-                strS = "00"
-                If (CDbl(strM) = 7) Or (CDbl(strM) = 22) Or (CDbl(strM) = 37) Or (CDbl(strM) = 52) Then
-                    strS = InputBox("This may round differently with seconds included. How many seconds? (leave blank if :00)", "Seconds?")
-                    If strS = vbNullString Or Not IsNumeric(strS) Then strS = "00"
-                End If
-                dblTimeOutput = ((CDbl(strH) + intAdjustor) / 24) + (((CDbl(strM) * 100) / 60) / 2400) + ((((CDbl(strS) * 100) / 60) / 60) / 2400)
+                dblTimeOutput = ((CDbl(Left(strTimeInput, 2)) + intAdjustor) / 24) + (((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 2400)
             Case Is = 3
-                strH = Left(strTimeInput, 1)
-                strM = Right(strTimeInput, 2)
-                strS = "00"
-                If (CDbl(strM) = 7) Or (CDbl(strM) = 22) Or (CDbl(strM) = 37) Or (CDbl(strM) = 52) Then
-                    strS = InputBox("This may round differently with seconds included. How many seconds? (leave blank if :00)", "Seconds?")
-                    If strS = vbNullString Or Not IsNumeric(strS) Then strS = "00"
-                End If
-                dblTimeOutput = ((CDbl(strH) + intAdjustor) / 24) + (((CDbl(strM) * 100) / 60) / 2400) + ((((CDbl(strS) * 100) / 60) / 60) / 2400)
+                dblTimeOutput = ((CDbl(Left(strTimeInput, 1)) + intAdjustor) / 24) + (((CDbl(Right(strTimeInput, 2)) * 100) / 60) / 2400)
             Case Is = 2
                 If CDbl(strTimeInput) > 24 Then Target.Value = "": GoTo EndOfSub Else dblTimeOutput = ((CDbl(strTimeInput) + intAdjustor) / 24)
             Case Is = 1
