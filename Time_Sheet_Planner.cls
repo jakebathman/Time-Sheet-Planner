@@ -36,7 +36,7 @@ Sub Worksheet_Change(ByVal Target As Range)
 
     Application.ScreenUpdating = False
     If Target.Count > 1 Then GoTo EndOfSub
-    If Not Intersect(Target, Range("B3:G3,B5:G5,B7:G7,B9:G9,B11:G11,B13:G13")) Is Nothing Then    'checks that the edited cell is in the time punch range
+    If Not Intersect(Target, Range("B3:G9")) Is Nothing Then    'checks that the edited cell is in the time punch range
         Application.DisplayCommentIndicator = xlCommentIndicatorOnly
         'pull old value to compare later
         Set rngWorkingCell = Range(Target.Address)
@@ -145,7 +145,7 @@ AdjustorCode:
         If Target.Column <> 2 Then
             Dim dblRowMax#
             dblRowMax = Application.WorksheetFunction.Max(Range(Cells(Target.Row, 2), Cells(Target.Row, Target.Column)))
-            If dblTimeOutput <= dblRowMax Or (Target.Column = 5 And dblTimeOutput >= dblRowMax And dblTimeOutput < 0.41666) Then ' only auto-PMs OUT times less than 10:00
+            If dblTimeOutput <= dblRowMax Or (Target.Column = 5 And dblTimeOutput >= dblRowMax And dblTimeOutput < 0.417) Then             ' only auto-PMs OUT times less than 10:00
                 dblTimeOutput = dblTimeOutput + 0.5
             End If
         End If
@@ -174,7 +174,7 @@ AdjustorCode:
 EndOfSub:
     Application.EnableEvents = False
     boolShadedCellsExist = False
-    For i = 3 To 13 Step 2
+    For i = 3 To 9
         For j = 2 To 7
             curValOfCell = Cells(i, j).Value
             If Cells(i, j).Value = "" Or Cells(i, j).Value = Empty Then
@@ -190,23 +190,23 @@ EndOfSub:
             End If
         Next j
     Next i
-    If boolShadedCellsExist Then
-        With Cells(17, 2)
-            .Value = "Note: Red shaded cells denote times imported from PeopleSoft"
-            .Interior.Pattern = xlSolid
-            .Interior.PatternColorIndex = xlAutomatic
-            .Interior.ThemeColor = xlThemeColorAccent6
-            .Interior.TintAndShade = 0.799981688894314
-            .Interior.PatternTintAndShade = 0
-        End With
-    Else
-        With Cells(17, 2)
-            .Value = ""
-            .Interior.Pattern = xlNone
-            .Interior.TintAndShade = 0
-            .Interior.PatternTintAndShade = 0
-        End With
-    End If
+'    If boolShadedCellsExist Then
+'        With Cells(17, 2)
+'            .Value = "Note: Red shaded cells denote times imported from PeopleSoft"
+'            .Interior.Pattern = xlSolid
+'            .Interior.PatternColorIndex = xlAutomatic
+'            .Interior.ThemeColor = xlThemeColorAccent6
+'            .Interior.TintAndShade = 0.799981688894314
+'            .Interior.PatternTintAndShade = 0
+'        End With
+'    Else
+'        With Cells(17, 2)
+'            .Value = ""
+'            .Interior.Pattern = xlNone
+'            .Interior.TintAndShade = 0
+'            .Interior.PatternTintAndShade = 0
+'        End With
+'    End If
 
     Application.EnableEvents = True
     Application.ScreenUpdating = True

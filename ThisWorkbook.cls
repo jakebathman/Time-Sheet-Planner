@@ -30,9 +30,9 @@ Dim i1, o1, i2, o2, i3, o3, timeoff
         '       Night:  (OUT - IN) + (OUT - IN)
         '   6 Punches:  (OUT - IN) - (INLUNCH - OUTLUNCH) + (OUT - IN)
 
-If Intersect(Target, Range("B3:H3,B5:H5,B7:H7,B9:H9,B11:H11,B13:H13")) Is Nothing Then Exit Sub    'checks that the edited cell is in the time punch range
+If Intersect(Target, Range("B3:H9")) Is Nothing Then Exit Sub    'checks that the edited cell is in the time punch range
 
-For i = 3 To 13 Step 2
+For i = 3 To 9
     i1 = sh.Cells(i, 2).Value
     o1 = sh.Cells(i, 3).Value
     i2 = sh.Cells(i, 4).Value

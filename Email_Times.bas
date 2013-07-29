@@ -49,7 +49,7 @@ ReDim arrPeople(1 To 6, 1 To 2)
 
 'check to see if there are times available to email
 boolNoPunchesRunImport = vbNo
-For i = 3 To 13 Step 2
+For i = 3 To 9
     For j = 2 To 7
         If Cells(i, j).Value = "" Or Cells(i, j).Value = Empty Then
             With Cells(i, j).Interior
@@ -143,7 +143,7 @@ For i = 2 To 7
     strMessage = strMessage & vbTab & vbTab & Cells(intMondayRow - 1, i).Value
 Next i
 
-For i = intMondayRow To (intMondayRow + 10) Step 2
+For i = intMondayRow To (intMondayRow + 6)
     If findinarray(Cells(i, 1).Value, arrDaysSelected) <> 0 Then
         strMessage = strMessage & vbCrLf & Left(Cells(i, 1).Value, 3) & vbCrLf & vbTab
         arrTimes(intCounter, 1) = Cells(i, 1).Value
