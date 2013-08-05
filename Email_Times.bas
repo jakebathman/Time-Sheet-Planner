@@ -64,42 +64,42 @@ For i = 3 To 9
     Next j
 Next i
 
-If i < 50 Then boolNoPunchesRunImport = MsgBox("Looks like you don't have any punches to email." & vbCrLf & vbCrLf & "Would you like to import some from PeopleSoft first?", vbYesNo)
+If i < 50 Then boolNoPunchesRunImport = MsgBox("Looks like you don't have any punches to email." & vbCrLf & vbCrLf & "You should add some first.", vbOKOnly)
 
 
 If boolNoPunchesRunImport = vbYes Then
     Call PeopeSoftImport
     End ' prevents the rest of this sub from running after import
-ElseIf boolNoPunchesRunImport = vbNo Then
+Else
     End
 End If
 
 arrPeople(1, 1) = "Jake B."
-arrPeople(2, 1) = "Lacie R."
+arrPeople(2, 1) = "Oscar M."
 arrPeople(3, 1) = "Carol S."
 arrPeople(4, 1) = "Kelley S."
 arrPeople(5, 1) = "Other A"
 arrPeople(6, 1) = "Other B"
-If Sheets("User Prefs").Cells(13, 2).Value <> "" Then arrPeople(5, 1) = Sheets("User Prefs").Cells(13, 2).Value
-If Sheets("User Prefs").Cells(14, 2).Value <> "" Then arrPeople(6, 1) = Sheets("User Prefs").Cells(14, 2).Value
+If Sheets("User Preferences").Cells(13, 2).Value <> "" Then arrPeople(5, 1) = Sheets("User Preferences").Cells(13, 2).Value
+If Sheets("User Preferences").Cells(14, 2).Value <> "" Then arrPeople(6, 1) = Sheets("User Preferences").Cells(14, 2).Value
 
 arrPeopleAndEmails(1, 1) = "Jake B."
-arrPeopleAndEmails(2, 1) = "Lacie R."
+arrPeopleAndEmails(2, 1) = "Oscar M."
 arrPeopleAndEmails(3, 1) = "Carol S."
 arrPeopleAndEmails(4, 1) = "Kelley S."
 arrPeopleAndEmails(5, 1) = "Other A"
 arrPeopleAndEmails(6, 1) = "Other B"
-If Sheets("User Prefs").Cells(13, 2).Value <> "" Then arrPeopleAndEmails(5, 1) = Sheets("User Prefs").Cells(13, 2).Value
-If Sheets("User Prefs").Cells(14, 2).Value <> "" Then arrPeopleAndEmails(6, 1) = Sheets("User Prefs").Cells(14, 2).Value
+If Sheets("User Preferences").Cells(13, 2).Value <> "" Then arrPeopleAndEmails(5, 1) = Sheets("User Preferences").Cells(13, 2).Value
+If Sheets("User Preferences").Cells(14, 2).Value <> "" Then arrPeopleAndEmails(6, 1) = Sheets("User Preferences").Cells(14, 2).Value
 
 arrPeopleAndEmails(1, 2) = "jbathman@co.collin.tx.us"
-arrPeopleAndEmails(2, 2) = "lreitmeyer@co.collin.tx.us"
+arrPeopleAndEmails(2, 2) = "omartinez@co.collin.tx.us"
 arrPeopleAndEmails(3, 2) = "cstrickland@co.collin.tx.us"
 arrPeopleAndEmails(4, 2) = "kstone@co.collin.tx.us"
 arrPeopleAndEmails(5, 2) = ""
 arrPeopleAndEmails(6, 2) = ""
-If Sheets("User Prefs").Cells(13, 3).Value <> "" Then arrPeopleAndEmails(5, 2) = Sheets("User Prefs").Cells(13, 3).Value
-If Sheets("User Prefs").Cells(14, 3).Value <> "" Then arrPeopleAndEmails(6, 2) = Sheets("User Prefs").Cells(14, 3).Value
+If Sheets("User Preferences").Cells(13, 3).Value <> "" Then arrPeopleAndEmails(5, 2) = Sheets("User Preferences").Cells(13, 3).Value
+If Sheets("User Preferences").Cells(14, 3).Value <> "" Then arrPeopleAndEmails(6, 2) = Sheets("User Preferences").Cells(14, 3).Value
 
 ReDim arrHeaders(1 To 6)
 arrHeaders(1) = "In"
@@ -115,7 +115,7 @@ boolRedPunches = False
 intOtherEmailsFirstRow = 13
 
 On Error Resume Next
-intOtherEmailsFirstRow = WorksheetFunction.Match("Other emails", Sheets("User Prefs").Range("A:A"), 0) + 1
+intOtherEmailsFirstRow = WorksheetFunction.Match("Other emails", Sheets("User Preferences").Range("A:A"), 0) + 1
 On Error GoTo ErrHandlerCode
 
 boolDone = False

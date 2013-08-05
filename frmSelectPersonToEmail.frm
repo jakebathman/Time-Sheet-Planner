@@ -148,12 +148,12 @@ Me.Hide
 On Error Resume Next
     If Me.chkClear.Value = True Then
         If strClearOldName = arrPeopleAndEmails(5, 1) Then
-            Sheets("User Prefs").Cells(intOtherEmailsFirstRow, 2) = ""
-            Sheets("User Prefs").Cells(intOtherEmailsFirstRow, 3) = ""
+            Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 2) = ""
+            Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 3) = ""
         End If
         If strClearOldName = arrPeopleAndEmails(6, 1) Then
-            Sheets("User Prefs").Cells(intOtherEmailsFirstRow + 1, 2) = ""
-            Sheets("User Prefs").Cells(intOtherEmailsFirstRow + 1, 3) = ""
+            Sheets("User Preferences").Cells(intOtherEmailsFirstRow + 1, 2) = ""
+            Sheets("User Preferences").Cells(intOtherEmailsFirstRow + 1, 3) = ""
         End If
     End If
 
@@ -185,8 +185,8 @@ While Not boolDone
                 strName = Me.boxOtherName.Value
                 strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
                 strEmail = Trim(Me.boxOtherEmail.Value)
-                Sheets("User Prefs").Cells(intOtherEmailsFirstRow, 2) = strName
-                Sheets("User Prefs").Cells(intOtherEmailsFirstRow, 3) = strEmail
+                Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 2) = strName
+                Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 3) = strEmail
             Else
                 boolDone = False
                 If MsgBox("Sorry, that wasn't a valid selection. Please select from the list.", vbOKCancel) = vbCancel Then End
@@ -198,8 +198,8 @@ While Not boolDone
                 strName = Me.boxOtherName.Value
                 strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
                 strEmail = Trim(Me.boxOtherEmail.Value)
-                Sheets("User Prefs").Cells(intOtherEmailsFirstRow + 1, 2) = strName
-                Sheets("User Prefs").Cells(intOtherEmailsFirstRow + 1, 3) = strEmail
+                Sheets("User Preferences").Cells(intOtherEmailsFirstRow + 1, 2) = strName
+                Sheets("User Preferences").Cells(intOtherEmailsFirstRow + 1, 3) = strEmail
             Else
                 boolDone = False
                 If MsgBox("Sorry, that wasn't a valid selection. Please select from the list.", vbOKCancel) = vbCancel Then End

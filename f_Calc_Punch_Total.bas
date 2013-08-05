@@ -22,22 +22,33 @@ Public Function fCalcPunchTotal(ByRef sh As Worksheet, curRow As Integer, in1, o
     'rngCurRange.Select
 
     Application.EnableEvents = False
-    t1 = (fRoundTime(in2) - fRoundTime(out1)) * 24
-    t2 = (fRoundTime(out2) - fRoundTime(in1)) * 24
-    t3 = (fRoundTime(out3) - fRoundTime(in3)) * 24
-    If out1 = vbNullString Or in2 = vbNullString Then t1 = 0
-    If out2 = vbNullString Or in1 = vbNullString Then t2 = 0
-    If out3 = vbNullString Or in3 = vbNullString Then t3 = 0
-    Select Case intPunchesInRow
-        Case 0, 2, 4, 6
-            If ((t2 - t1) + t3 + timeoff) = 0 Then
-                rngTotCell.Value = ""
-            Else
-                rngTotCell.Value = Format((t2 - t1) + t3 + timeoff, "#.00")
-            End If
-        Case Else
+
+    ' if only the first two columns have times, change computation method
+    If out1 > 0 And in1 > 0 And (out2 = vbNullString And out3 = vbNullString And in2 = vbNullString And in3 = vbNullString) Then
+        t1 = (fRoundTime(out1) - fRoundTime(in1)) * 24    ' early day two punches
+        If t1 >= 0 Then
+            rngTotCell.Value = Format(t1 + timeoff, "#.00")
+        Else
             rngTotCell.Value = ""
-    End Select
+        End If
+    Else
+        t1 = (fRoundTime(in2) - fRoundTime(out1)) * 24    ' lunch
+        t2 = (fRoundTime(out2) - fRoundTime(in1)) * 24    ' full day (including lunch)
+        t3 = (fRoundTime(out3) - fRoundTime(in3)) * 24    ' final in/out set
+        If out1 = vbNullString Or in2 = vbNullString Then t1 = 0
+        If out2 = vbNullString Or in1 = vbNullString Then t2 = 0
+        If out3 = vbNullString Or in3 = vbNullString Then t3 = 0
+        Select Case intPunchesInRow
+            Case 0, 2, 4, 6
+                If ((t2 - t1) + t3 + timeoff) = 0 Then
+                    rngTotCell.Value = ""
+                Else
+                    rngTotCell.Value = Format((t2 - t1) + t3 + timeoff, "#.00")
+                End If
+            Case Else
+                rngTotCell.Value = ""
+        End Select
+    End If
     Application.EnableEvents = True
 
 
@@ -90,9 +101,9 @@ Public Function fRoundTime(ByVal t As Double) As Double
 
 
 
-    Debug.Print "Hr:  " & intHr
-    Debug.Print "Min: " & intMin
-    Debug.Print "Sec: " & intSec
+    'Debug.Print "Hr:  " & intHr
+    'Debug.Print "Min: " & intMin
+    'Debug.Print "Sec: " & intSec
 
     fRoundTime = (intHr / 24) + (intMin / 24 / 60) + (intSec / 24 / 60 / 60)
 
@@ -104,13 +115,13 @@ End Function
 
 
 Public Function Ceiling(ByVal x As Double, Optional ByVal Factor As Double = 1) As Double
-' X is the value you want to round
-' is the multiple to which you want to round
+    ' X is the value you want to round
+    ' is the multiple to which you want to round
     Ceiling = (Int(x / Factor) - (x / Factor - Int(x / Factor) > 0)) * Factor
 End Function
 
 Public Function Floor(ByVal x As Double, Optional ByVal Factor As Double = 1) As Double
-' X is the value you want to round
-' is the multiple to which you want to round
+    ' X is the value you want to round
+    ' is the multiple to which you want to round
     Floor = Int(x / Factor) * Factor
 End Function
