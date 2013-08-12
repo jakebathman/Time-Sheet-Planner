@@ -7,6 +7,11 @@ Sub clearstuff()
     Dim i As Integer
     Dim t
     Dim x#
+    Dim intNoPromptsPrefRow%
+    Dim boolNoPrompts As Boolean
+
+    boolNoPrompts = False
+
 
     With frmWorking
         .Show False
@@ -23,7 +28,23 @@ Sub clearstuff()
 
     Call FindTheSheetInfo
 
-    YesNo = MsgBox("Really clear your inputted time below?", vbOKCancel)
+    With Sheets("User Preferences")
+        For i = 1 To 50
+            If InStr(1, .Cells(i, 1).Value, "No Prompts", vbTextCompare) > 0 Then
+                intNoPromptsPrefRow = i
+                Exit For
+            End If
+        Next i
+        If StrComp(.Cells(i, 3).Value, "X", vbTextCompare) = 0 And .Cells(i + 1, 3).Value = vbNullString Then
+            boolNoPrompts = True
+        End If
+    End With
+
+    If boolNoPrompts Then
+        YesNo = vbOK
+    Else
+        YesNo = MsgBox("Really clear your inputted time below?", vbOKCancel)
+    End If
 
     If YesNo <> vbOK Then Unload frmWorking: Exit Sub
     Application.ScreenUpdating = False
@@ -119,7 +140,7 @@ Sub clearstuff()
             Call UpdateWorkingForm(30)
             x = 30
             t = Timer
-            While Timer < t + 0.45
+            While Timer < t + 0.1
                 Call UpdateWorkingForm(x)
                 x = x + 0.05
                 'Debug.Print x
@@ -137,7 +158,7 @@ Sub clearstuff()
             .Interior.PatternTintAndShade = 0
             Call UpdateWorkingForm(30)
             t = Timer
-            While Timer < t + 0.15
+            While Timer < t + 0.1
                 Call UpdateWorkingForm(x)
                 x = x + 0.05
                 'Debug.Print x
@@ -177,27 +198,27 @@ Sub clearstuff()
     Call UpdateWorkingForm(100)
 
 
-'    Dim boolRestoreBackup
-'
-'    boolRestoreBackup = MsgBox("All clear, captain!" & vbCrLf & vbCrLf & "I created a backup (just in case) of your original data. " _
-'                             & "Delete the backup now and use this empty sheet?" _
-'                             & vbCrLf & vbCrLf & "Yes: Keep changes to main sheet and delete backup." _
-'                             & vbCrLf & "No: Restore my old stuff (Undo clearing data)." _
-'                             & vbCrLf & vbCrLf & "(WARNING! Any action is not reversible.)", vbYesNo)
-'
-'    Select Case boolRestoreBackup
-'        Case vbYes
-'            'Delete backup sheet
-'            Application.DisplayAlerts = False
-'            ActiveWorkbook.Sheets("Backup of Time Sheet Planner").Delete
-'            Application.DisplayAlerts = True
-'        Case vbNo
-'            'Restore backup sheet (pre-macro state)
-'            Application.DisplayAlerts = False
-'            ActiveWorkbook.Sheets("Time Sheet Planner").Delete
-'            Sheets("Backup of Time Sheet Planner").Name = "Time Sheet Planner"
-'            Application.DisplayAlerts = True
-'    End Select
+    '    Dim boolRestoreBackup
+    '
+    '    boolRestoreBackup = MsgBox("All clear, captain!" & vbCrLf & vbCrLf & "I created a backup (just in case) of your original data. " _
+         '                             & "Delete the backup now and use this empty sheet?" _
+         '                             & vbCrLf & vbCrLf & "Yes: Keep changes to main sheet and delete backup." _
+         '                             & vbCrLf & "No: Restore my old stuff (Undo clearing data)." _
+         '                             & vbCrLf & vbCrLf & "(WARNING! Any action is not reversible.)", vbYesNo)
+    '
+    '    Select Case boolRestoreBackup
+    '        Case vbYes
+    '            'Delete backup sheet
+    '            Application.DisplayAlerts = False
+    '            ActiveWorkbook.Sheets("Backup of Time Sheet Planner").Delete
+    '            Application.DisplayAlerts = True
+    '        Case vbNo
+    '            'Restore backup sheet (pre-macro state)
+    '            Application.DisplayAlerts = False
+    '            ActiveWorkbook.Sheets("Time Sheet Planner").Delete
+    '            Sheets("Backup of Time Sheet Planner").Name = "Time Sheet Planner"
+    '            Application.DisplayAlerts = True
+    '    End Select
 
 
 ErrHandlerCode:
