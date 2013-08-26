@@ -1,14 +1,32 @@
 ### Time-Sheet-Planner
 
-This is a tool used internally at Collin County HLS to manage PeopleSoft time for employees. The current version is v6.4 which can be downloaded here: ##link##
+This is a tool used internally at Collin County HLS to manage PeopleSoft time for employees. The current version is v7.0.1 which can be downloaded here: http://jakebathman.com/work/timesheetplanner/
 
 ========
 
 ### Changelog
 
+**v7.1 (beta - not yet released)**
+* In User Preferences sheet, now a "No Prompt" can be toggled to decrease prompts (right now only suppresses Clear Sheet prompt).
+
+**v7.0.1 (released 8/5/2013)**
+* Removed "Example" sheet
+* Changed name of prefs sheet to "User Preferences" 
+* * Removed peoplesoft prompt from Email button, if no times existed (now just ends with warning)
+* Added Oscar to Email list, and revised the order of people to email (now, direct supervisors are first)
+* Revision to punch calculation, where only two punches in the first and second columns will produce a time (fixed from prior releases)
+
+
 **v7.0 (unreleased)**
 * Added Supervisor sheet for calculating by pay period
 * Added code to GitHub, which will track all issues and the changelog from now on: https://github.com/jakebathman/Time-Sheet-Planner
+* Re-formatted main sheet
+* Commented out backup prompt/code on Clear Sheet (untested)
+* Added Instructions form to eliminate clunky text on the sheet
+* Removed hidden rows & relevant code ("step 2" stuff)
+* Removed or commented out backup code and sheets, since they're pretty much worthless and only slow everything down
+* Slightly revised the auto-PM code in main sheet change event
+
 
 
 **v6.5 Beta (unreleased)**
