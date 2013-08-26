@@ -9,10 +9,11 @@ This is a tool used internally at Collin County HLS to manage PeopleSoft time fo
 **v7.1 (beta - not yet released)**
 * In User Preferences sheet, now a "No Prompt" can be toggled to decrease prompts (right now only suppresses Clear Sheet prompt).
 
+
 **v7.0.1 (released 8/5/2013)**
 * Removed "Example" sheet
 * Changed name of prefs sheet to "User Preferences" 
-* * Removed peoplesoft prompt from Email button, if no times existed (now just ends with warning)
+* Removed peoplesoft prompt from Email button, if no times existed (now just ends with warning)
 * Added Oscar to Email list, and revised the order of people to email (now, direct supervisors are first)
 * Revision to punch calculation, where only two punches in the first and second columns will produce a time (fixed from prior releases)
 
@@ -28,16 +29,15 @@ This is a tool used internally at Collin County HLS to manage PeopleSoft time fo
 * Slightly revised the auto-PM code in main sheet change event
 
 
-
 **v6.5 Beta (unreleased)**
 * To-Do: Fix PeopleSoft importing (maybe add web browser or refreshable web query?)
 * To-Do: Fix last punch estimator (not showing up anymore, because formulas point to blank hidden rows)
-* To-Do:	Remove references to hidden rows in code, and delete those rows
+* To-Do: Remove references to hidden rows in code, and delete those rows
 * Fixed lingering progress bar when cancelling the clearing of a sheet
 * Changed how the Clear Times sub works, since we don't care about the hidden rows anymore (simply clears a range of cells now, instead of slowly looping)
 * Added Sunday to the timesheet (even though it's rarely used)
-* To-Do:	Automatically email about time off needed to be entered, if any exists (only for full-weeks? Figure out how to calculate)
-* To-Do:	If entering afternoon (last punch) in a row, make it PM if it looks like it should be
+* To-Do: Automatically email about time off needed to be entered, if any exists (only for full-weeks? Figure out how to calculate)
+* To-Do: If entering afternoon (last punch) in a row, make it PM if it looks like it should be
 * Times with seconds can now be entered without punctuation (e.g. 12:22:46 can be entered as 122246 and will format correctly)
 * Times entered in OUT column are assumed to be PM and a final (night) punch
 
@@ -101,8 +101,8 @@ This is a tool used internally at Collin County HLS to manage PeopleSoft time fo
 * PS Importer currently discards (ignores) time off values
 * Update conflict resolution to include ability to move punches (for missing IN PS punches)
 * Decrease number of prompts to user; become more autonomous
-* Eventually fully automate calculations, instead of using hidden cells
-* Re-work design and layout to be easier to understand (less big blocks of text)
+* ~~Eventually fully automate calculations, instead of using hidden cells~~
+* ~~Re-work design and layout to be easier to understand (less big blocks of text)~~
 * Adjust last-punch calculator to be VBA, include all contingencies and proper trigger for showing
 * Make auto-round of PeopleSoft times a user-selectable option (default rounded)
 
