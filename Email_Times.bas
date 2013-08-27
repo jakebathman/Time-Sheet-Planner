@@ -236,7 +236,7 @@ strDateAsString = CStr(strDate)
 On Error Resume Next
 With OutMail
     '.display
-    .To = strEmail
+    .to = strEmail
     .CC = ""
     .BCC = ""
     .Subject = "My times for the week of " & Mid(strDateAsString, 1, Len(strDateAsString) - 5)
