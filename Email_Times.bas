@@ -70,8 +70,6 @@ If i < 50 Then boolNoPunchesRunImport = MsgBox("Looks like you don't have any pu
 If boolNoPunchesRunImport = vbYes Then
     Call PeopeSoftImport
     End ' prevents the rest of this sub from running after import
-Else
-    End
 End If
 
 arrPeople(1, 1) = "Jake B."
@@ -236,7 +234,7 @@ strDateAsString = CStr(strDate)
 On Error Resume Next
 With OutMail
     '.display
-    .to = strEmail
+    .To = strEmail
     .CC = ""
     .BCC = ""
     .Subject = "My times for the week of " & Mid(strDateAsString, 1, Len(strDateAsString) - 5)
