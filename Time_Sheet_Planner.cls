@@ -113,7 +113,7 @@ Sub Worksheet_Change(ByVal Target As Range)
                 dblTimeOutput = ((CDbl(strH) + intAdjustor) / 24) + (((CDbl(strM) * 100) / 60) / 2400) + ((((CDbl(strS) * 100) / 60) / 60) / 2400)
             Case Is = 5
                 strH = Left(strTimeInput, 1)
-                strM = Mid(strTimeInput, 1, 2)
+                strM = Mid(strTimeInput, 2, 2)
                 strS = Right(strTimeInput, 2)
                 dblTimeOutput = ((CDbl(strH) + intAdjustor) / 24) + (((CDbl(strM) * 100) / 60) / 2400) + ((((CDbl(strS) * 100) / 60) / 60) / 2400)
             Case Is = 4
