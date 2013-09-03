@@ -12,7 +12,8 @@ Option Explicit
 
 
 Private Sub btnPrintTimeOffForm_Click()
-    ActiveSheet.PrintPreview
+    'ActiveSheet.PrintPreview
+    Sheets("Time Off Form").PrintOut From:=1, To:=1
 End Sub
 
 Private Sub calToDate_Click()
