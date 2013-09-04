@@ -160,11 +160,6 @@ Private Sub Worksheet_Change(ByVal Target As Range)
     Application.ScreenUpdating = False
     If Target.Count > 1 Then GoTo EndOfSub
 
-    For i = 1 To 50
-        If Cells(1, i).Value = vbNullString And Cells(1, i + 1).Value = vbNullString And Cells(1, i + 2).Value = vbNullString Then Exit For
-        If Cells(1, i).Value = "In 6/27" Then intLeftCol = i: strLeftCol = Mid(Cells(1, i).Address(1, 1, xlA1), 2, 1)
-        If Cells(1, i).Value = "Out 6/27" Then intRightCol = i: strRightCol = Mid(Cells(1, i).Address(1, 1, xlA1), 2, 1): Exit For
-    Next i
     If Target.Address = "$D$4" Or Target.Address = "$D$6" Then   'checks that the edited cell is in the time punch range
 
         On Error Resume Next
