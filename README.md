@@ -1,14 +1,17 @@
 ### Time-Sheet-Planner
 
-This is a tool used internally at Collin County HLS to manage PeopleSoft time for employees. The current version is v7.0.1 which can be downloaded here: http://jakebathman.com/work/timesheetplanner/
+This is a tool used internally at Collin County HLS to manage PeopleSoft time for employees. The current version is v7.1 which can be downloaded here: http://jakebathman.com/work/timesheetplanner/
 
 ========
 
 ### Changelog
 
-**v7.1 (beta - not yet released)**
+**v7.1 (released 9/4/2013)**
 * In User Preferences sheet, now a "No Prompt" can be toggled to decrease prompts (right now only suppresses Clear Sheet prompt).
-
+* Fixed major bug in Email Times button code
+* Added Time Off Form sheet with helper code
+* Minor main-sheet formatting changes (Issues #4, #5)
+* Fixed bug with string logic for something like 30742 (3:07:42 pm). Logic wasn't dividing string correctly to calculate time. Changed mid(str,1,2) to mid(str,2,2) (was outputting min as 30 instead of 07).
 
 **v7.0.1 (released 8/5/2013)**
 * Removed "Example" sheet
