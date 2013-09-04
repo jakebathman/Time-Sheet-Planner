@@ -41,56 +41,56 @@ Private Sub CheckBox7_Click()
     If boolYesFiveDays = False And boolYesSevenDays = False Then arrCheckBoxStates(7) = Me.CheckBox7.Value
 End Sub
 
-Public Sub CheckBox8_Click() 'Mon-Fri
-If boolYesFiveDays = False And boolYesSevenDays = False Then
-    boolYesFiveDays = True
-'    For i = 1 To 7 'capture current checked states
-'        arrCheckBoxStates(i) = Me.Controls("CheckBox" & i).Value
-'    Next i
-    For i = 1 To 5
-        Me.Controls("CheckBox" & i).Value = True
-        Me.Controls("CheckBox" & i).Locked = True
-        Me.Controls("CheckBox" & i).Enabled = False
-    Next i
-ElseIf boolYesSevenDays = False Then
-boolYesFiveDays = False
-    For i = 1 To 5 'restore previous checked states
-        Me.Controls("CheckBox" & i).Locked = False
-        Me.Controls("CheckBox" & i).Value = arrCheckBoxStates(i)
-        Me.Controls("CheckBox" & i).Enabled = True
-    Next i
-End If
+Public Sub CheckBox8_Click()    'Mon-Fri
+    If boolYesFiveDays = False And boolYesSevenDays = False Then
+        boolYesFiveDays = True
+        '    For i = 1 To 7 'capture current checked states
+        '        arrCheckBoxStates(i) = Me.Controls("CheckBox" & i).Value
+        '    Next i
+        For i = 1 To 5
+            Me.Controls("CheckBox" & i).Value = True
+            Me.Controls("CheckBox" & i).Locked = True
+            Me.Controls("CheckBox" & i).Enabled = False
+        Next i
+    ElseIf boolYesSevenDays = False Then
+        boolYesFiveDays = False
+        For i = 1 To 5    'restore previous checked states
+            Me.Controls("CheckBox" & i).Locked = False
+            Me.Controls("CheckBox" & i).Value = arrCheckBoxStates(i)
+            Me.Controls("CheckBox" & i).Enabled = True
+        Next i
+    End If
 
 End Sub
 
-Private Sub CheckBox9_Click() 'All 7 days
-If boolYesSevenDays = False Then
-    boolYesSevenDays = True
-'    For i = 1 To 7 'capture current checked states
-'        arrCheckBoxStates(i) = Me.Controls("CheckBox" & i).Value
-'    Next i
-    For i = 1 To 7
-        With Me
-            .Controls("CheckBox" & i).Value = True
-            .Controls("CheckBox" & i).Locked = True
-            .Controls("CheckBox" & i).Enabled = False
-        End With
-    Next i
-    Me.CheckBox8.Locked = True
-    Me.CheckBox8.Value = True
-    Me.CheckBox8.Enabled = False
-Else
-    For i = 1 To 7 'restore previous checked states
-        Me.Controls("CheckBox" & i).Value = arrCheckBoxStates(i)
-        Me.Controls("CheckBox" & i).Enabled = True
-        Me.Controls("CheckBox" & i).Locked = False
-    Next i
-    Me.CheckBox8.Locked = False
-    Me.CheckBox8.Value = False
-    Me.CheckBox8.Enabled = True
-    boolYesFiveDays = False
-    boolYesSevenDays = False
-End If
+Private Sub CheckBox9_Click()    'All 7 days
+    If boolYesSevenDays = False Then
+        boolYesSevenDays = True
+        '    For i = 1 To 7 'capture current checked states
+        '        arrCheckBoxStates(i) = Me.Controls("CheckBox" & i).Value
+        '    Next i
+        For i = 1 To 7
+            With Me
+                .Controls("CheckBox" & i).Value = True
+                .Controls("CheckBox" & i).Locked = True
+                .Controls("CheckBox" & i).Enabled = False
+            End With
+        Next i
+        Me.CheckBox8.Locked = True
+        Me.CheckBox8.Value = True
+        Me.CheckBox8.Enabled = False
+    Else
+        For i = 1 To 7    'restore previous checked states
+            Me.Controls("CheckBox" & i).Value = arrCheckBoxStates(i)
+            Me.Controls("CheckBox" & i).Enabled = True
+            Me.Controls("CheckBox" & i).Locked = False
+        Next i
+        Me.CheckBox8.Locked = False
+        Me.CheckBox8.Value = False
+        Me.CheckBox8.Enabled = True
+        boolYesFiveDays = False
+        boolYesSevenDays = False
+    End If
 End Sub
 
 Private Sub CommandButton1_Click()
@@ -139,14 +139,14 @@ End Sub
 
 
 Public Sub CommandButton3_Click()
-For i = 1 To 7
-    arrCheckBoxStates(i) = False
-Next i
-For i = 1 To 9
-    Me.Controls("CheckBox" & i).Value = False
-    Me.Controls("CheckBox" & i).Locked = False
-    Me.Controls("CheckBox" & i).Enabled = True
-Next i
+    For i = 1 To 7
+        arrCheckBoxStates(i) = False
+    Next i
+    For i = 1 To 9
+        Me.Controls("CheckBox" & i).Value = False
+        Me.Controls("CheckBox" & i).Locked = False
+        Me.Controls("CheckBox" & i).Enabled = True
+    Next i
 End Sub
 
 Private Sub optCurWeek_Click()
@@ -182,20 +182,20 @@ Private Sub UserForm_Initialize()
     strDayofMonth = Day(Date)
     frmPickDaysToEmail.optCurWeek.Caption = "Current Week (Starting " & SetDateStrings(Date + 7) & ")"
     frmPickDaysToEmail.optPrevWeek.Caption = "Previous Week (Starting " & SetDateStrings(Date) & ")"
-    frmPickDaysToEmail.lblTodayIs.Caption = "Today is " & WeekdayName(Weekday(Date, vbMonday), False, vbMonday) & ", " & Left(strMonth, 3) & ". " & strDayofMonth '
+    frmPickDaysToEmail.lblTodayIs.Caption = "Today is " & WeekdayName(Weekday(Date, vbMonday), False, vbMonday) & ", " & Left(strMonth, 3) & ". " & strDayofMonth    '
     Me.optPrevWeek.Value = True
-'    Me.Show
+    '    Me.Show
 End Sub
 
 Private Sub UserForm_Activate()
-Me.Top = Application.Top + (Application.Height / 2) - (Me.Height / 2)
-Me.Left = Application.Left + (Application.Width / 2) - (Me.Width / 2)
-''    Me.Left = 500
-''    Me.Top = 200
-''    If boolPreviousWeek = True Then c = 7 Else c = 0
-''    strMonth = MonthName(Month(Date))
-''    strDayofMonth = Day(Date)
-''    frmPickDaysToEmail.optCurWeek.Caption = "Current Week (Starting " & SetDateStrings(Date + 7) & ")"
-''    frmPickDaysToEmail.optPrevWeek.Caption = "Previous Week (Starting " & SetDateStrings(Date) & ")"
-''    frmPickDaysToEmail.lblTodayIs.Caption = "Today is " & WeekdayName(Weekday(Date, vbMonday), False, vbMonday) & ", " & Left(strMonth, 3) & ". " & strDayofMonth
+    Me.Top = Application.Top + (Application.Height / 2) - (Me.Height / 2)
+    Me.Left = Application.Left + (Application.Width / 2) - (Me.Width / 2)
+    ''    Me.Left = 500
+    ''    Me.Top = 200
+    ''    If boolPreviousWeek = True Then c = 7 Else c = 0
+    ''    strMonth = MonthName(Month(Date))
+    ''    strDayofMonth = Day(Date)
+    ''    frmPickDaysToEmail.optCurWeek.Caption = "Current Week (Starting " & SetDateStrings(Date + 7) & ")"
+    ''    frmPickDaysToEmail.optPrevWeek.Caption = "Previous Week (Starting " & SetDateStrings(Date) & ")"
+    ''    frmPickDaysToEmail.lblTodayIs.Caption = "Today is " & WeekdayName(Weekday(Date, vbMonday), False, vbMonday) & ", " & Left(strMonth, 3) & ". " & strDayofMonth
 End Sub

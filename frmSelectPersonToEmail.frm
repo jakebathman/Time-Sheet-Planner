@@ -24,8 +24,8 @@ Private Sub boxOtherEmail_AfterUpdate()
 End Sub
 
 Private Sub boxOtherEmail_Change()
-        'Me.chkClear.Enabled = True
-        'Me.chkClear.Value = False
+    'Me.chkClear.Enabled = True
+    'Me.chkClear.Value = False
     strNewEmail = Me.boxOtherEmail.Value
     boolDropFocus = False
     If strNewEmail = "" Then
@@ -33,7 +33,7 @@ Private Sub boxOtherEmail_Change()
         'Me.chkClear.Enabled = False
         'Me.chkClear.Value = False
     Else
-        If InStr(1, strNewEmail, "@co.collin.tx.us") = 0 And Len(strOldEmail) > Len("@co.collin.tx.us") Then 'fix string missing county suffix
+        If InStr(1, strNewEmail, "@co.collin.tx.us") = 0 And Len(strOldEmail) > Len("@co.collin.tx.us") Then    'fix string missing county suffix
             Me.boxOtherEmail.Value = strOldEmailPrefix & "@co.collin.tx.us"
         ElseIf InStr(1, strNewEmail, "co.collin.tx.us") Then
             Me.boxOtherEmail.Value = Left(Me.boxOtherEmail.Value, Len(Me.boxOtherEmail.Value) - Len("@co.collin.tx.us")) & "@co.collin.tx.us"
@@ -51,8 +51,8 @@ Private Sub boxOtherEmail_Enter()
 End Sub
 
 Private Sub boxOtherName_Change()
-        'Me.chkClear.Enabled = True
-        'Me.chkClear.Value = False
+    'Me.chkClear.Enabled = True
+    'Me.chkClear.Value = False
     boolDropFocus = False
     Me.boxOtherName.Value = StrConv(Me.boxOtherName.Value, vbProperCase)
     Dim intSp%, intSpTwo%
@@ -97,16 +97,16 @@ Private Sub boxPeople_Change()
         Me.chkClear.Value = False
         Me.Label2.Visible = True
         Me.Label3.Visible = True
-            If Left(Me.boxPeople.Value, 5) <> "Other" Then
-                Select Case Me.boxPeople.Value
-                    Case arrPeopleAndEmails(5, 1)
-                        Me.boxOtherName.Value = arrPeopleAndEmails(5, 1)
-                        Me.boxOtherEmail.Value = arrPeopleAndEmails(5, 2)
-                    Case arrPeopleAndEmails(6, 1)
-                        Me.boxOtherName.Value = arrPeopleAndEmails(6, 1)
-                        Me.boxOtherEmail.Value = arrPeopleAndEmails(6, 2)
-                End Select
-            End If
+        If Left(Me.boxPeople.Value, 5) <> "Other" Then
+            Select Case Me.boxPeople.Value
+                Case arrPeopleAndEmails(5, 1)
+                    Me.boxOtherName.Value = arrPeopleAndEmails(5, 1)
+                    Me.boxOtherEmail.Value = arrPeopleAndEmails(5, 2)
+                Case arrPeopleAndEmails(6, 1)
+                    Me.boxOtherName.Value = arrPeopleAndEmails(6, 1)
+                    Me.boxOtherEmail.Value = arrPeopleAndEmails(6, 2)
+            End Select
+        End If
         Me.boxOtherName.SetFocus
         boolDropFocus = False
     Else
@@ -141,11 +141,11 @@ End Sub
 
 
 Private Sub btnSubmit_Click()
-boolDropFocus = False
-boolDone = False
-Application.EnableEvents = False
-Me.Hide
-On Error Resume Next
+    boolDropFocus = False
+    boolDone = False
+    Application.EnableEvents = False
+    Me.Hide
+    On Error Resume Next
     If Me.chkClear.Value = True Then
         If strClearOldName = arrPeopleAndEmails(5, 1) Then
             Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 2) = ""
@@ -157,61 +157,61 @@ On Error Resume Next
         End If
     End If
 
-While Not boolDone
-    Select Case Me.boxPeople
-        Case "Eileen P."
-            strEmail = "eprentice@co.collin.tx.us"
-            strName = Me.boxPeople.Value
-            strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
-            boolDone = True
-        Case "Lawana D."
-            strEmail = "ldowns@co.collin.tx.us"
-            strName = Me.boxPeople.Value
-            strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
-            boolDone = True
-        Case "Carol S."
-            boolDone = True
-            strName = Me.boxPeople.Value
-            strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
-            strEmail = "cstrickland@co.collin.tx.us"
-        Case "Jake B."
-            boolDone = True
-            strName = "Jake"
-            strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
-            strEmail = "jbathman@co.collin.tx.us"
-        Case arrPeopleAndEmails(5, 1)
-            If Me.boxOtherEmail.Value <> "" And Me.boxOtherName.Value <> "" Then
-                boolDone = True
-                strName = Me.boxOtherName.Value
+    While Not boolDone
+        Select Case Me.boxPeople
+            Case "Eileen P."
+                strEmail = "eprentice@co.collin.tx.us"
+                strName = Me.boxPeople.Value
                 strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
-                strEmail = Trim(Me.boxOtherEmail.Value)
-                Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 2) = strName
-                Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 3) = strEmail
-            Else
-                boolDone = False
+                boolDone = True
+            Case "Lawana D."
+                strEmail = "ldowns@co.collin.tx.us"
+                strName = Me.boxPeople.Value
+                strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
+                boolDone = True
+            Case "Carol S."
+                boolDone = True
+                strName = Me.boxPeople.Value
+                strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
+                strEmail = "cstrickland@co.collin.tx.us"
+            Case "Jake B."
+                boolDone = True
+                strName = "Jake"
+                strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
+                strEmail = "jbathman@co.collin.tx.us"
+            Case arrPeopleAndEmails(5, 1)
+                If Me.boxOtherEmail.Value <> "" And Me.boxOtherName.Value <> "" Then
+                    boolDone = True
+                    strName = Me.boxOtherName.Value
+                    strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
+                    strEmail = Trim(Me.boxOtherEmail.Value)
+                    Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 2) = strName
+                    Sheets("User Preferences").Cells(intOtherEmailsFirstRow, 3) = strEmail
+                Else
+                    boolDone = False
+                    If MsgBox("Sorry, that wasn't a valid selection. Please select from the list.", vbOKCancel) = vbCancel Then End
+                    Me.Show
+                End If
+            Case arrPeopleAndEmails(6, 1)
+                If Me.boxOtherEmail.Value <> "" And Me.boxOtherName.Value <> "" Then
+                    boolDone = True
+                    strName = Me.boxOtherName.Value
+                    strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
+                    strEmail = Trim(Me.boxOtherEmail.Value)
+                    Sheets("User Preferences").Cells(intOtherEmailsFirstRow + 1, 2) = strName
+                    Sheets("User Preferences").Cells(intOtherEmailsFirstRow + 1, 3) = strEmail
+                Else
+                    boolDone = False
+                    If MsgBox("Sorry, that wasn't a valid selection. Please select from the list.", vbOKCancel) = vbCancel Then End
+                    Me.Show
+                End If
+            Case Else
                 If MsgBox("Sorry, that wasn't a valid selection. Please select from the list.", vbOKCancel) = vbCancel Then End
                 Me.Show
-            End If
-        Case arrPeopleAndEmails(6, 1)
-            If Me.boxOtherEmail.Value <> "" And Me.boxOtherName.Value <> "" Then
-                boolDone = True
-                strName = Me.boxOtherName.Value
-                strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
-                strEmail = Trim(Me.boxOtherEmail.Value)
-                Sheets("User Preferences").Cells(intOtherEmailsFirstRow + 1, 2) = strName
-                Sheets("User Preferences").Cells(intOtherEmailsFirstRow + 1, 3) = strEmail
-            Else
-                boolDone = False
-                If MsgBox("Sorry, that wasn't a valid selection. Please select from the list.", vbOKCancel) = vbCancel Then End
-                Me.Show
-            End If
-        Case Else
-            If MsgBox("Sorry, that wasn't a valid selection. Please select from the list.", vbOKCancel) = vbCancel Then End
-            Me.Show
-    End Select
-Wend
-Application.EnableEvents = True
-On Error GoTo 0
+        End Select
+    Wend
+    Application.EnableEvents = True
+    On Error GoTo 0
 End Sub
 
 Private Sub btnCancel_Click()

@@ -20,7 +20,7 @@ Public Sub ExportForGit()
         'Wend
         c = c + 1
     Next
-    
+
     Application.ActiveWorkbook.SaveCopyAs "C:\Users\e008922\Dropbox\_Git\Time-Sheet-Planner\Time Sheet Planner.xlsm"
 
 End Sub

@@ -25,6 +25,6 @@ Public Sub btnUseThisSheet_Click()
 End Sub
 
 Private Sub UserForm_Activate()
-Me.Top = Application.Top + (Application.Height / 2) - (Me.Height / 2)
-Me.Left = Application.Left + (Application.Width / 2) - (Me.Width / 2)
+    Me.Top = Application.Top + (Application.Height / 2) - (Me.Height / 2)
+    Me.Left = Application.Left + (Application.Width / 2) - (Me.Width / 2)
 End Sub

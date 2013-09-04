@@ -3,6 +3,6 @@ Option Explicit
 
 Public Sub SwitchEnableEvents()
 
-Application.EnableEvents = Not Application.EnableEvents
+    Application.EnableEvents = Not Application.EnableEvents
 
 End Sub

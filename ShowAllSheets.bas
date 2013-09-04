@@ -2,9 +2,9 @@ Attribute VB_Name = "ShowAllSheets"
 
 
 Public Sub ShowAllSheets()
-Call MaintenanceAndRepair
+    Call MaintenanceAndRepair
     For i = 1 To ThisWorkbook.Sheets.Count
         Sheets(i).Visible = True
     Next i
-Call MaintenanceAndRepair
+    Call MaintenanceAndRepair
 End Sub

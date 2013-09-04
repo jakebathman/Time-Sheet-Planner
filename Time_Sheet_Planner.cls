@@ -190,23 +190,23 @@ EndOfSub:
             End If
         Next j
     Next i
-'    If boolShadedCellsExist Then
-'        With Cells(17, 2)
-'            .Value = "Note: Red shaded cells denote times imported from PeopleSoft"
-'            .Interior.Pattern = xlSolid
-'            .Interior.PatternColorIndex = xlAutomatic
-'            .Interior.ThemeColor = xlThemeColorAccent6
-'            .Interior.TintAndShade = 0.799981688894314
-'            .Interior.PatternTintAndShade = 0
-'        End With
-'    Else
-'        With Cells(17, 2)
-'            .Value = ""
-'            .Interior.Pattern = xlNone
-'            .Interior.TintAndShade = 0
-'            .Interior.PatternTintAndShade = 0
-'        End With
-'    End If
+    '    If boolShadedCellsExist Then
+    '        With Cells(17, 2)
+    '            .Value = "Note: Red shaded cells denote times imported from PeopleSoft"
+    '            .Interior.Pattern = xlSolid
+    '            .Interior.PatternColorIndex = xlAutomatic
+    '            .Interior.ThemeColor = xlThemeColorAccent6
+    '            .Interior.TintAndShade = 0.799981688894314
+    '            .Interior.PatternTintAndShade = 0
+    '        End With
+    '    Else
+    '        With Cells(17, 2)
+    '            .Value = ""
+    '            .Interior.Pattern = xlNone
+    '            .Interior.TintAndShade = 0
+    '            .Interior.PatternTintAndShade = 0
+    '        End With
+    '    End If
 
     Application.EnableEvents = True
     Application.ScreenUpdating = True

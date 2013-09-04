@@ -16,17 +16,9 @@ Private Sub btnPrintTimeOffForm_Click()
     Sheets("Time Off Form").PrintOut From:=1, To:=1
 End Sub
 
-Private Sub calToDate_Click()
-    Range("$C$6").Value = calToDate.Value
-End Sub
-
-Private Sub calFromDate_Click()
-    Range("$C$4").Value = calFromDate.Value
-End Sub
-
 Private Sub chkCat_Click()
     Dim boolThisCheck As Boolean
-    
+
     boolThisCheck = Me.chkCat.Value
 
     chkPTO.Value = False
@@ -35,13 +27,13 @@ Private Sub chkCat_Click()
     chkOther.Value = False
     chkCompEarned.Value = False
     chkOvertimeEarned.Value = False
-    
+
     chkCat = boolThisCheck
 End Sub
 
 Private Sub chkComp_Click()
     Dim boolThisCheck As Boolean
-    
+
     boolThisCheck = Me.chkComp.Value
 
     chkPTO.Value = False
@@ -50,13 +42,13 @@ Private Sub chkComp_Click()
     chkOther.Value = False
     chkCompEarned.Value = False
     chkOvertimeEarned.Value = False
-    
+
     chkComp = boolThisCheck
 End Sub
 
 Private Sub chkCompEarned_Click()
     Dim boolThisCheck As Boolean
-    
+
     boolThisCheck = Me.chkCompEarned.Value
 
     chkPTO.Value = False
@@ -65,13 +57,13 @@ Private Sub chkCompEarned_Click()
     chkOther.Value = False
     chkCompEarned.Value = False
     chkOvertimeEarned.Value = False
-    
+
     chkCompEarned = boolThisCheck
 End Sub
 
 Private Sub chkOther_Click()
     Dim boolThisCheck As Boolean
-    
+
     boolThisCheck = Me.chkOther.Value
 
     chkPTO.Value = False
@@ -80,13 +72,13 @@ Private Sub chkOther_Click()
     chkOther.Value = False
     chkCompEarned.Value = False
     chkOvertimeEarned.Value = False
-    
+
     chkOther = boolThisCheck
 End Sub
 
 Private Sub chkOvertimeEarned_Click()
     Dim boolThisCheck As Boolean
-    
+
     boolThisCheck = Me.chkOvertimeEarned.Value
 
     chkPTO.Value = False
@@ -95,13 +87,13 @@ Private Sub chkOvertimeEarned_Click()
     chkOther.Value = False
     chkCompEarned.Value = False
     chkOvertimeEarned.Value = False
-    
+
     chkOvertimeEarned = boolThisCheck
 End Sub
 
 Private Sub chkPTO_Click()
     Dim boolThisCheck As Boolean
-    
+
     boolThisCheck = Me.chkPTO.Value
 
     chkPTO.Value = False
@@ -110,7 +102,7 @@ Private Sub chkPTO_Click()
     chkOther.Value = False
     chkCompEarned.Value = False
     chkOvertimeEarned.Value = False
-    
+
     chkPTO = boolThisCheck
 End Sub
 
@@ -135,34 +127,13 @@ End Sub
 
 Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     If ActiveWindow.View <> xlNormalView Then ActiveWindow.View = xlNormalView
-    calDateSubmitted.Visible = False
-    calFromDate.Visible = False
-    calToDate.Visible = False
-
+    Load CalendarFrm
     If Target.Address = "$C$4" Then
-        If Target.Value = vbNullString Then
-            calFromDate.Value = Date
-            Target.Value = Date
-        Else
-            calFromDate.Value = Target.Value
-        End If
-        calFromDate.Visible = True
+        CalendarFrm.Show
     ElseIf Target.Address = "$C$6" Then
-        If Target.Value = vbNullString Then
-            calToDate.Value = Date
-            Target.Value = Date
-        Else
-            calToDate.Value = Target.Value
-        End If
-        calToDate.Visible = True
+        CalendarFrm.Show
     ElseIf Target.Address = "$H$2" Then
-        If Target.Value = vbNullString Then
-            calDateSubmitted.Value = Date
-            Target.Value = Date
-        Else
-            calDateSubmitted.Value = Target.Value
-        End If
-        calDateSubmitted.Visible = True
+        CalendarFrm.Show
     End If
 
 End Sub

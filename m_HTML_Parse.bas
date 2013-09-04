@@ -3,29 +3,29 @@ Option Explicit
 
 Public Sub ParseTimesheetHTML()
 
-'   This sub is more for supervisors, who can't use the copy-paste method of importing from PeopleSoft
+    '   This sub is more for supervisors, who can't use the copy-paste method of importing from PeopleSoft
 
-Dim oFSO As New FileSystemObject
-Dim oFS
-Dim sText$, x$
-Dim boolInPunchBlock As Boolean
+    Dim oFSO As New FileSystemObject
+    Dim oFS
+    Dim sText$, x$
+    Dim boolInPunchBlock As Boolean
 
-boolInPunchBlock = False
+    boolInPunchBlock = False
 
-Set oFS = oFSO.OpenTextFile("C:\Users\e008922\Downloads\Report Time.htm")
+    Set oFS = oFSO.OpenTextFile("C:\Users\e008922\Downloads\Report Time.htm")
 
-Do Until oFS.AtEndOfStream
-    sText = oFS.ReadLine
-    If StrComp(sText, "<tr valign='center'>", vbTextCompare) = 0 Then
-        boolInPunchBlock = True
-    End If
-    If boolInPunchBlock And StrComp(sText, "</table>", vbTextCompare) = 0 Then
-        boolInPunchBlock = False
-    End If
-    If boolInPunchBlock Then x = x & sText
-Loop
+    Do Until oFS.AtEndOfStream
+        sText = oFS.ReadLine
+        If StrComp(sText, "<tr valign='center'>", vbTextCompare) = 0 Then
+            boolInPunchBlock = True
+        End If
+        If boolInPunchBlock And StrComp(sText, "</table>", vbTextCompare) = 0 Then
+            boolInPunchBlock = False
+        End If
+        If boolInPunchBlock Then x = x & sText
+    Loop
 
-Debug.Print x
+    Debug.Print x
 
 
 End Sub

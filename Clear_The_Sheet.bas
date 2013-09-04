@@ -12,7 +12,6 @@ Sub clearstuff()
 
     boolNoPrompts = False
 
-
     With frmWorking
         .Show False
         .Height = 60
@@ -58,73 +57,9 @@ Sub clearstuff()
 
     dblTimeNowRnd = Now()
 
-
-    '    'create backups
-    '    boolBackupOperationComplete = False
-    '    Application.DisplayAlerts = False
-    '
-    '    On Error Resume Next
-    '    IsError (Sheets("Backup of Time Sheet Planner").Index)
-    '
-    '    If Err.Number <> 9 Then
-    '        Call UpdateWorkingForm
-    '        While boolBackupOperationComplete = False
-    '            boolOverwriteBackup = MsgBox("Backup of main sheet already exists. Overwrite?", vbYesNoCancel)
-    '            Select Case boolOverwriteBackup
-    '                Case vbYes
-    '                    'creates hidden backup sheet of backup, just in case. Not accessed anywhere else, must be manually reinstated
-    '                    On Error Resume Next
-    '                    Sheets("Hidden Backup of Old Backup").Visible = True
-    '                    Sheets("Hidden Backup of Old Backup").Delete
-    '                    On Error GoTo ErrHandlerCode
-    '                    Sheets("Backup of Time Sheet Planner").Activate
-    '                    Sheets("Backup of Time Sheet Planner").Copy after:=Sheets("Backup of Time Sheet Planner")
-    '                    ActiveSheet.Name = "TmpSheet" & dblTimeNowRnd + Rnd
-    '                    intCurSheetNum = ActiveSheet.Index
-    '                    ActiveSheet.Name = "Hidden Backup of Old Backup"
-    '                    ActiveSheet.Visible = xlSheetVeryHidden
-    '                    Sheets("Backup of Time Sheet Planner").Delete
-    '                    Sheets(1).Activate
-    '                    Sheets(1).Copy after:=Sheets(1)
-    '                    ActiveSheet.Name = "Backup of Time Sheet Planner"
-    '                    boolBackupOperationComplete = True
-    '                Case vbNo
-    '                    vbRUSure = MsgBox("This won't back up your current sheet, but keep a (possibly) old backup. Really continue without backing up main sheet?", vbYesNo + vbQuestion)
-    '                    If vbRUSure = vbYes Then boolBackupOperationComplete = True
-    '                Case vbCancel
-    '                    End
-    '            End Select
-    '        Wend
-    '    Else
-    '        Call UpdateWorkingForm
-    '        Sheets("Time Sheet Planner").Activate
-    '        ActiveSheet.Copy after:=Sheets("Time Sheet Planner")
-    '        ActiveSheet.Name = "Backup of Time Sheet Planner"
-    '        Call UpdateWorkingForm
-    '    End If
-    '
-    '    'creates hidden backup of main sheet, just in case. Not accessed anywhere else, must be manually reinstated
-    '    On Error Resume Next
-    '    Application.DisplayAlerts = False
-    '    Sheets("Hidden Backup of Main").Visible = True
-    '    Sheets("Hidden Backup of Main").Delete
-    '    On Error GoTo ErrHandlerCode
-    '    Call UpdateWorkingForm
-    '    Sheets("Time Sheet Planner").Activate
-    '    Sheets("Time Sheet Planner").Copy after:=Sheets("Backup of Time Sheet Planner")
-    '    Call UpdateWorkingForm
-    '    ActiveSheet.Name = "TmpSheet" & dblTimeNowRnd + Rnd
-    '    intCurSheetNum = ActiveSheet.Index
-    '    ActiveSheet.Name = "Hidden Backup of Main"
-    '    ActiveSheet.Visible = xlSheetVeryHidden
-    '    Call UpdateWorkingForm
-
     Application.DisplayAlerts = True
 
-
     Call UpdateWorkingForm
-
-
 
     Application.EnableEvents = False
 
@@ -151,7 +86,7 @@ Sub clearstuff()
             .Comment.Delete
             On Error GoTo ErrHandlerCode
         End With
-        With Sheets("Time Sheet Planner").Range("K3:K9")
+        With Sheets("Time Sheet Planner").Range("L3:L9")
             .Value = ""
             .Interior.Pattern = xlNone
             .Interior.TintAndShade = 0
@@ -196,29 +131,6 @@ Sub clearstuff()
     Application.EnableEvents = True
 
     Call UpdateWorkingForm(100)
-
-
-    '    Dim boolRestoreBackup
-    '
-    '    boolRestoreBackup = MsgBox("All clear, captain!" & vbCrLf & vbCrLf & "I created a backup (just in case) of your original data. " _
-         '                             & "Delete the backup now and use this empty sheet?" _
-         '                             & vbCrLf & vbCrLf & "Yes: Keep changes to main sheet and delete backup." _
-         '                             & vbCrLf & "No: Restore my old stuff (Undo clearing data)." _
-         '                             & vbCrLf & vbCrLf & "(WARNING! Any action is not reversible.)", vbYesNo)
-    '
-    '    Select Case boolRestoreBackup
-    '        Case vbYes
-    '            'Delete backup sheet
-    '            Application.DisplayAlerts = False
-    '            ActiveWorkbook.Sheets("Backup of Time Sheet Planner").Delete
-    '            Application.DisplayAlerts = True
-    '        Case vbNo
-    '            'Restore backup sheet (pre-macro state)
-    '            Application.DisplayAlerts = False
-    '            ActiveWorkbook.Sheets("Time Sheet Planner").Delete
-    '            Sheets("Backup of Time Sheet Planner").Name = "Time Sheet Planner"
-    '            Application.DisplayAlerts = True
-    '    End Select
 
 
 ErrHandlerCode:

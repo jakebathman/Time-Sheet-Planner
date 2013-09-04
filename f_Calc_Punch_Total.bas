@@ -17,7 +17,7 @@ Public Function fCalcPunchTotal(ByRef sh As Worksheet, curRow As Integer, in1, o
     Set rngCurRange = sh.Range(Cells(curRow, 2), Cells(curRow, 7))
     intPunchesInRow = Application.CountA(rngCurRange)
     If IsError(intPunchesInRow) Then intPunchesInRow = 0
-    Set rngTotCell = Range("K" & curRow)
+    Set rngTotCell = Range("L" & curRow)
 
     'rngCurRange.Select
 
