@@ -6,7 +6,10 @@ This is a tool used internally at Collin County HLS to manage PeopleSoft time fo
 
 ### Changelog
 
-**v7.1.1 (released 9/4/2013)**
+**v7.1.2 (released 9/4/2013)**
+* Minor bug fix with entering time into Time Off Form sheet
+
+**v7.1.2 (unreleased)**
 * Calendar control wasn't going to work on other computers, so it was replaced with a stock control only version
 * Added back the time off code column on main sheet, by request
 * Other minor bug fixes, code cleanup, and sheet formatting
