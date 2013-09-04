@@ -6,6 +6,11 @@ This is a tool used internally at Collin County HLS to manage PeopleSoft time fo
 
 ### Changelog
 
+**v7.1.1 (released 9/4/2013)**
+* Calendar control wasn't going to work on other computers, so it was replaced with a stock control only version
+* Added back the time off code column on main sheet, by request
+* Other minor bug fixes, code cleanup, and sheet formatting
+
 **v7.1 (released 9/4/2013)**
 * In User Preferences sheet, now a "No Prompt" can be toggled to decrease prompts (right now only suppresses Clear Sheet prompt).
 * Fixed major bug in Email Times button code
