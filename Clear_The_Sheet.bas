@@ -111,6 +111,22 @@ Sub clearstuff()
 
     Call UpdateWorkingForm(75)
 
+' Add drop-down for time off code selection
+    With Range("H3:H9").Validation
+        .Delete
+        .Add Type:=xlValidateList, AlertStyle:=xlValidAlertInformation, _
+             Operator:=xlBetween, Formula1:="=References!$B$2:$B$5"
+        .IgnoreBlank = False
+        .InCellDropdown = True
+        .InputTitle = ""
+        .ErrorTitle = ""
+        .InputMessage = ""
+        .ErrorMessage = ""
+        .ShowInput = False
+        .ShowError = False
+    End With
+
+
     '    With Cells(17, 2)
     '        .Value = ""
     '        .Interior.Pattern = xlNone
