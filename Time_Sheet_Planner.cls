@@ -191,11 +191,11 @@ AdjustorCode:
 
 
         With Sheets("Time Sheet Planner")
-            If .Range("I11").Value <> "" Then strTotalTimeOff = Trim(Mid(.Range("I11").Value, 1, InStr(1, .Range("I11").Value, " ", vbTextCompare)))
-            If .Range("I12").Value <> "" Then strPTOTime = .Range("I12").Value
-            If .Range("I13").Value <> "" Then strCompTime = .Range("I13").Value
-            If .Range("I14").Value <> "" Then strHolidayTime = .Range("I14").Value
-            If .Range("I15").Value <> "" Then strOtherTimeOff = .Range("I15").Value
+            If .Range("I11").Value <> "" And .Range("I11").Value <> "?" Then strTotalTimeOff = Trim(Mid(.Range("I11").Value, 1, InStr(1, .Range("I11").Value, " ", vbTextCompare)))
+            If .Range("I12").Value <> "" And .Range("I12").Value <> "?" Then strPTOTime = .Range("I12").Value
+            If .Range("I13").Value <> "" And .Range("I13").Value <> "?" Then strCompTime = .Range("I13").Value
+            If .Range("I14").Value <> "" And .Range("I14").Value <> "?" Then strHolidayTime = .Range("I14").Value
+            If .Range("I15").Value <> "" And .Range("I15").Value <> "?" Then strOtherTimeOff = .Range("I15").Value
         End With
 
         If CDbl(strTotalTimeOff) - CDbl(strHolidayTime) > 0 Then
