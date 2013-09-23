@@ -7,7 +7,7 @@ Public Sub ParseTimesheetHTML()
 
     Dim oFSO As New FileSystemObject
     Dim oFS
-    Dim sText$, x$
+    Dim sText$, X$
     Dim boolInPunchBlock As Boolean
 
     boolInPunchBlock = False
@@ -22,10 +22,10 @@ Public Sub ParseTimesheetHTML()
         If boolInPunchBlock And StrComp(sText, "</table>", vbTextCompare) = 0 Then
             boolInPunchBlock = False
         End If
-        If boolInPunchBlock Then x = x & sText
+        If boolInPunchBlock Then X = X & sText
     Loop
 
-    Debug.Print x
+    Debug.Print X
 
 
 End Sub

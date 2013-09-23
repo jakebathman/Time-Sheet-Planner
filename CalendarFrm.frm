@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} CalendarFrm 
    Caption         =   "Calendar Control"
-   ClientHeight    =   3690
+   ClientHeight    =   4065
    ClientLeft      =   45
    ClientTop       =   360
    ClientWidth     =   3960
@@ -22,6 +22,35 @@ Dim ThisDay As Date
 Dim ThisYear, ThisMth As Date
 Dim CreateCal As Boolean
 Dim i As Integer
+
+
+
+
+
+Private Sub btnTodaySelect_Click()
+    ActiveCell.Value = Date
+    Me.Hide
+End Sub
+
+Private Sub btnTomorrowSelect_Click()
+    ActiveCell.Value = Date + 1
+    Me.Hide
+End Sub
+
+
+
+
+
+
+Private Sub UserForm_Activate()
+
+Me.Top = ActiveCell.Top + (Application.Height - Application.UsableHeight) + ActiveCell.Height + Application.Top
+
+Me.Left = Application.Left + ActiveCell.Left + (ActiveWindow.Width - ActiveWindow.UsableWidth)
+
+
+End Sub
+
 Private Sub UserForm_Initialize()
     Application.EnableEvents = False
     'starts the form on todays date

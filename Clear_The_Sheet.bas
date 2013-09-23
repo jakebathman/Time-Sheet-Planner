@@ -6,7 +6,7 @@ Sub clearstuff()
 
     Dim i As Integer
     Dim t
-    Dim x#
+    Dim X#
     Dim intNoPromptsPrefRow%
     Dim boolNoPrompts As Boolean
 
@@ -73,11 +73,11 @@ Sub clearstuff()
             .Interior.TintAndShade = 0
             .Interior.PatternTintAndShade = 0
             Call UpdateWorkingForm(30)
-            x = 30
+            X = 30
             t = Timer
             While Timer < t + 0.1
-                Call UpdateWorkingForm(x)
-                x = x + 0.05
+                Call UpdateWorkingForm(X)
+                X = X + 0.05
                 'Debug.Print x
                 DoEvents
             Wend
@@ -94,8 +94,8 @@ Sub clearstuff()
             Call UpdateWorkingForm(30)
             t = Timer
             While Timer < t + 0.1
-                Call UpdateWorkingForm(x)
-                x = x + 0.05
+                Call UpdateWorkingForm(X)
+                X = X + 0.05
                 'Debug.Print x
                 DoEvents
             Wend
@@ -111,7 +111,7 @@ Sub clearstuff()
 
     Call UpdateWorkingForm(75)
 
-' Add drop-down for time off code selection
+    ' Add drop-down for time off code selection
     With Range("H3:H9").Validation
         .Delete
         .Add Type:=xlValidateList, AlertStyle:=xlValidAlertInformation, _
@@ -134,11 +134,13 @@ Sub clearstuff()
     '        .Interior.PatternTintAndShade = 0
     '    End With
     While Timer < t + 0.1
-        Call UpdateWorkingForm(x)
-        x = x + 0.04
-        Debug.Print x
+        Call UpdateWorkingForm(X)
+        X = X + 0.04
+        Debug.Print X
         DoEvents
     Wend
+
+    Sheets("Time Sheet Planner").btnCreateTimeOffSheet.Visible = False
 
     Cells(3, 2).Select
     Call UpdateWorkingForm

@@ -8,102 +8,133 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Option Explicit
+Public boolChangingStuff As Boolean
 
-
+Private Sub boxEmployeeName_Change()
+    If boxEmployeeName.Value <> "Choose name . . ." Then
+        boxEmployeeName.BackColor = &HFFFFFF
+    Else
+        boxEmployeeName.BackColor = &HC0E0FF
+    End If
+    boxEmployeeName.SelLength = 0
+    Range("C2:D2").Select
+End Sub
 
 Private Sub btnPrintTimeOffForm_Click()
     'ActiveSheet.PrintPreview
     Sheets("Time Off Form").PrintOut From:=1, To:=1
 End Sub
 
-Private Sub chkCat_Click()
+Public Sub btnResetTimeOffForm_Click()
+    Application.EnableEvents = False
+    Application.ScreenUpdating = False
+    boxEmployeeName.Value = "Choose name . . ."
+    Range("D4").Value = ""  ' from time
+    Range("D6").Value = ""  ' to time
+    Range("C4").Value = ""  ' from date
+    Range("C6").Value = ""  ' to date
+    Range("H6").Value = ""  ' total hrs
+
+    Range("H2").Value = Date   ' sets Date Submitted to today's date
+
+
+    boolChangingStuff = True
+    Call ChkAllFalse
+    boolChangingStuff = False
+    Call ColorNeededChks
+
+    Range("A24:J30").ClearContents    ' Reason text
+
+    Range("C2:D2").Select    ' total hrs
+    Application.ScreenUpdating = True
+    Application.EnableEvents = True
+
+End Sub
+
+Private Sub chkCat_Change()
     Dim boolThisCheck As Boolean
+    If boolChangingStuff Then Exit Sub
 
     boolThisCheck = Me.chkCat.Value
 
-    chkPTO.Value = False
-    chkCat.Value = False
-    chkComp.Value = False
-    chkOther.Value = False
-    chkCompEarned.Value = False
-    chkOvertimeEarned.Value = False
+    Call ChkAllFalse
 
+    boolChangingStuff = True
     chkCat = boolThisCheck
+    boolChangingStuff = False
+    Call ColorNeededChks
 End Sub
 
-Private Sub chkComp_Click()
+Private Sub chkComp_Change()
     Dim boolThisCheck As Boolean
+    If boolChangingStuff Then Exit Sub
 
     boolThisCheck = Me.chkComp.Value
 
-    chkPTO.Value = False
-    chkCat.Value = False
-    chkComp.Value = False
-    chkOther.Value = False
-    chkCompEarned.Value = False
-    chkOvertimeEarned.Value = False
+    Call ChkAllFalse
 
-    chkComp = boolThisCheck
+    boolChangingStuff = True
+    chkComp.Value = boolThisCheck
+    boolChangingStuff = False
+    Call ColorNeededChks
 End Sub
 
-Private Sub chkCompEarned_Click()
+Private Sub chkCompEarned_Change()
     Dim boolThisCheck As Boolean
+    If boolChangingStuff Then Exit Sub
 
     boolThisCheck = Me.chkCompEarned.Value
 
-    chkPTO.Value = False
-    chkCat.Value = False
-    chkComp.Value = False
-    chkOther.Value = False
-    chkCompEarned.Value = False
-    chkOvertimeEarned.Value = False
+    Call ChkAllFalse
 
-    chkCompEarned = boolThisCheck
+    boolChangingStuff = True
+    chkCompEarned.Value = boolThisCheck
+    boolChangingStuff = False
+    Call ColorNeededChks
 End Sub
 
-Private Sub chkOther_Click()
+Private Sub chkOther_Change()
     Dim boolThisCheck As Boolean
+    If boolChangingStuff Then Exit Sub
 
     boolThisCheck = Me.chkOther.Value
 
-    chkPTO.Value = False
-    chkCat.Value = False
-    chkComp.Value = False
-    chkOther.Value = False
-    chkCompEarned.Value = False
-    chkOvertimeEarned.Value = False
+    Call ChkAllFalse
 
-    chkOther = boolThisCheck
+    boolChangingStuff = True
+    chkOther.Value = boolThisCheck
+    boolChangingStuff = False
+    Call ColorNeededChks
 End Sub
 
-Private Sub chkOvertimeEarned_Click()
+Private Sub chkOvertimeEarned_Change()
     Dim boolThisCheck As Boolean
+    If boolChangingStuff Then Exit Sub
 
     boolThisCheck = Me.chkOvertimeEarned.Value
 
-    chkPTO.Value = False
-    chkCat.Value = False
-    chkComp.Value = False
-    chkOther.Value = False
-    chkCompEarned.Value = False
-    chkOvertimeEarned.Value = False
+    Call ChkAllFalse
 
-    chkOvertimeEarned = boolThisCheck
+    boolChangingStuff = True
+    chkOvertimeEarned.Value = boolThisCheck
+    boolChangingStuff = False
+    Call ColorNeededChks
 End Sub
 
-Private Sub chkPTO_Click()
+
+
+Private Sub chkPTO_Change()
     Dim boolThisCheck As Boolean
+    If boolChangingStuff Then Exit Sub
 
     boolThisCheck = Me.chkPTO.Value
 
-    chkPTO.Value = False
-    chkCat.Value = False
-    chkComp.Value = False
-    chkOther.Value = False
-    chkCompEarned.Value = False
-    chkOvertimeEarned.Value = False
+    Call ChkAllFalse
+    boolChangingStuff = True
+    chkPTO.Value = boolThisCheck
+    boolChangingStuff = False
 
-    chkPTO = boolThisCheck
+    Call ColorNeededChks
 End Sub
 
 Private Sub Worksheet_Activate()
@@ -115,6 +146,7 @@ Private Sub Worksheet_Activate()
         For i = 2 To 50
             If .Cells(i, 1).Value = vbNullString Then
                 Sheets("Time Off Form").boxEmployeeName.ListFillRange = "References!$A$2:$A$" & i - 1
+                Sheets("Time Off Form").boxEmployeeName.ListRows = i
                 Exit For
             End If
         Next i
@@ -127,13 +159,9 @@ End Sub
 
 Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     If ActiveWindow.View <> xlNormalView Then ActiveWindow.View = xlNormalView
-    Load CalendarFrm
-    If Target.Address = "$C$4" Then
+    If Target.Address = "$C$4" Or Target.Address = "$C$6" Or Target.Address = "$H$2" Then
         CalendarFrm.Show
-    ElseIf Target.Address = "$C$6" Then
-        CalendarFrm.Show
-    ElseIf Target.Address = "$H$2" Then
-        CalendarFrm.Show
+    Unload CalendarFrm
     End If
 
 End Sub
@@ -264,3 +292,61 @@ EndOfSub:
 
 
 End Sub
+
+Public Sub ColorNeededChks()
+    Application.EnableEvents = False
+
+    With Sheets("Time Off Form")
+        If chkPTO.Value = False And chkComp.Value = False And chkCat.Value = False And chkOther.Value = False And chkOvertimeEarned.Value = False And chkCompEarned.Value = False Then
+            ' orange
+            With .Range("B10").Interior
+                .Pattern = xlUp
+                .PatternThemeColor = xlThemeColorDark1
+                .ThemeColor = xlThemeColorAccent6
+                .TintAndShade = 0.399945066682943
+                .PatternTintAndShade = 0
+            End With
+            With .Range("B12").Interior
+                .Pattern = xlUp
+                .PatternThemeColor = xlThemeColorDark1
+                .ThemeColor = xlThemeColorAccent6
+                .TintAndShade = 0.399945066682943
+                .PatternTintAndShade = 0
+            End With
+            With .Range("B19").Interior
+                .Pattern = xlUp
+                .PatternThemeColor = xlThemeColorDark1
+                .ThemeColor = xlThemeColorAccent6
+                .TintAndShade = 0.399945066682943
+                .PatternTintAndShade = 0
+            End With
+            With .Range("B21").Interior
+                .Pattern = xlUp
+                .PatternThemeColor = xlThemeColorDark1
+                .ThemeColor = xlThemeColorAccent6
+                .TintAndShade = 0.399945066682943
+                .PatternTintAndShade = 0
+            End With
+        Else
+            .Range("B10").ClearFormats
+            .Range("B12").ClearFormats
+            .Range("B19").ClearFormats
+            .Range("B21").ClearFormats
+        End If
+    End With
+    Application.EnableEvents = True
+
+End Sub
+
+
+Public Sub ChkAllFalse()
+    boolChangingStuff = True
+    chkPTO.Value = False
+    chkComp.Value = False
+    chkCat.Value = False
+    chkOther.Value = False
+    chkCompEarned.Value = False
+    chkOvertimeEarned.Value = False
+    boolChangingStuff = False
+End Sub
+
