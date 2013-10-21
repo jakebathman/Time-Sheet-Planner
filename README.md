@@ -8,6 +8,10 @@ This is a tool used internally at Collin County HLS to manage PeopleSoft time fo
 
 ### Changelog
 
+**v7.4 (released 10/21/2013)**
+* Revisions and updates to Time Off Sheet formatting and back-end code
+* Other minor formatting and code changes
+
 **v7.3.1 (released 9/23/2013)**
 * Minor bug fixes
 
