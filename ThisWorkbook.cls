@@ -48,6 +48,5 @@ Private Sub Workbook_SheetChange(ByVal sh As Object, ByVal Target As Range)
         Call fCalcPunchTotal(sh, i, i1, o1, i2, o2, i3, o3, timeoff)
     Next i
 
-
 End Sub
 

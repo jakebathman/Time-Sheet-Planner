@@ -44,7 +44,9 @@ Public Sub btnResetTimeOffForm_Click()
     Call ColorNeededChks
 
     Range("A24:J30").ClearContents    ' Reason text
-
+    Range("D32:I32").ClearContents    ' Reason text comp earned
+    Range("D35:I35").ClearContents    ' Reason text overtime earned
+    Call ColorNeededChks
     Range("C2:D2").Select    ' total hrs
     Application.ScreenUpdating = True
     Application.EnableEvents = True
@@ -161,7 +163,7 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range)
     If ActiveWindow.View <> xlNormalView Then ActiveWindow.View = xlNormalView
     If Target.Address = "$C$4" Or Target.Address = "$C$6" Or Target.Address = "$H$2" Then
         CalendarFrm.Show
-    Unload CalendarFrm
+        Unload CalendarFrm
     End If
 
 End Sub
@@ -170,7 +172,19 @@ End Sub
 
 
 Private Sub Worksheet_Change(ByVal Target As Range)
+    Application.EnableEvents = False
+
     If Range("$C$6").Value < Range("$C$4").Value Then Range("$C$6").Value = Range("$C$4").Value
+
+    ' Color the reason for time off box if it's blank
+    If chkPTO.Value = True Or chkCat.Value = True Or chkComp.Value = True Or chkOther.Value = True Then
+        If Range("A24").Value = vbNullString Then
+            Call MainReasonOrange
+        Else
+            Call MainReasonWhite
+        End If
+    End If
+
 
     ' Code to allow flexible time input formats
     Dim dblTimeInput#
@@ -286,6 +300,8 @@ Private Sub Worksheet_Change(ByVal Target As Range)
 
 EndOfSub:
 
+    Call ColorNeededChks
+
     Application.EnableEvents = True
     Application.ScreenUpdating = True
     Exit Sub
@@ -333,6 +349,79 @@ Public Sub ColorNeededChks()
             .Range("B19").ClearFormats
             .Range("B21").ClearFormats
         End If
+
+        If chkCompEarned.Value = True Then
+            Call MainReasonWhite
+            If .Range("D32").Value = vbNullString Then
+                'orange
+                With .Range("D32:I32").Interior
+                    .Pattern = xlUp
+                    .PatternThemeColor = xlThemeColorDark1
+                    .ThemeColor = xlThemeColorAccent6
+                    .TintAndShade = 0.399945066682943
+                    .PatternTintAndShade = 0
+                End With
+            Else
+                'white
+                With .Range("D32:I32").Interior
+                    .Pattern = xlNone
+                    .TintAndShade = 0
+                    .PatternTintAndShade = 0
+                End With
+            End If
+        Else
+            'white
+            With .Range("D32:I32").Interior
+                .Pattern = xlNone
+                .TintAndShade = 0
+                .PatternTintAndShade = 0
+            End With
+
+        End If
+
+        If chkOvertimeEarned.Value = True Then
+            Call MainReasonWhite
+            If .Range("D35").Value = vbNullString Then
+                'orange
+                With .Range("D35:I35").Interior
+                    .Pattern = xlUp
+                    .PatternThemeColor = xlThemeColorDark1
+                    .ThemeColor = xlThemeColorAccent6
+                    .TintAndShade = 0.399945066682943
+                    .PatternTintAndShade = 0
+                End With
+            Else
+                'white
+                With .Range("D35:I35").Interior
+                    .Pattern = xlNone
+                    .TintAndShade = 0
+                    .PatternTintAndShade = 0
+                End With
+            End If
+        Else
+            'white
+            With .Range("D35:I35").Interior
+                .Pattern = xlNone
+                .TintAndShade = 0
+                .PatternTintAndShade = 0
+            End With
+
+        End If
+
+
+
+
+        ' Color the reason for time off box if it's blank
+        If chkPTO.Value = True Or chkCat.Value = True Or chkComp.Value = True Or chkOther.Value = True Then
+            If Range("A24").Value = vbNullString Then
+                Call MainReasonOrange
+            End If
+        Else
+            Call MainReasonWhite
+        End If
+
+
+
     End With
     Application.EnableEvents = True
 
@@ -350,3 +439,23 @@ Public Sub ChkAllFalse()
     boolChangingStuff = False
 End Sub
 
+Public Sub MainReasonWhite()
+    'white
+    With Range("A24:I24").Interior
+        .Pattern = xlNone
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+End Sub
+
+
+Public Sub MainReasonOrange()
+    Range("A24:I24").ClearContents
+    With Range("A24:I24").Interior
+        .Pattern = xlUp
+        .PatternThemeColor = xlThemeColorDark1
+        .ThemeColor = xlThemeColorAccent6
+        .TintAndShade = 0.399945066682943
+        .PatternTintAndShade = 0
+    End With
+End Sub
