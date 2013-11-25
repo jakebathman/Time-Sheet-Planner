@@ -47,6 +47,7 @@ Private Sub Workbook_SheetChange(ByVal sh As Object, ByVal Target As Range)
         timeoff = sh.Cells(i, 9).Value
         Call fCalcPunchTotal(sh, i, i1, o1, i2, o2, i3, o3, timeoff)
     Next i
+    Call showHideTimeOffButtons
 
 End Sub
 

@@ -9,6 +9,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Option Explicit
 
+Private Sub btnCreateCompForm_Click()
+    
+    Call CreateTimeOffForm
+
+End Sub
+
 Private Sub btnCreateTimeOffSheet_Click()
 
     Call CreateTimeOffForm
@@ -18,6 +24,8 @@ End Sub
 Private Sub btnInstructions_Click()
     frmInstructions.Show
 End Sub
+
+
 
 Private Sub Worksheet_Activate()
     Application.EnableEvents = True
@@ -174,39 +182,9 @@ AdjustorCode:
     End If
 
 
-    If Not Intersect(Target, Range("H3:I9")) Is Nothing Then    'checks that the edited cell is in the time off range
-
-        '
-        '   BEGIN
-        '
-        '   Show/hide "Create Time Off Sheet" button
-        Dim strTotalTimeOff$, strPTOTime$, strCompTime$, strOtherTimeOff$, strHolidayTime$
-        Dim strEmployeeName$
-
-        strTotalTimeOff = "0"
-        strPTOTime = "0"
-        strCompTime = "0"
-        strOtherTimeOff = "0"
-        strHolidayTime = "0"
 
 
-        With Sheets("Time Sheet Planner")
-            If .Range("I11").Value <> "" And .Range("I11").Value <> "?" Then strTotalTimeOff = Trim(Mid(.Range("I11").Value, 1, InStr(1, .Range("I11").Value, " ", vbTextCompare)))
-            If .Range("I12").Value <> "" And .Range("I12").Value <> "?" Then strPTOTime = .Range("I12").Value
-            If .Range("I13").Value <> "" And .Range("I13").Value <> "?" Then strCompTime = .Range("I13").Value
-            If .Range("I14").Value <> "" And .Range("I14").Value <> "?" Then strHolidayTime = .Range("I14").Value
-            If .Range("I15").Value <> "" And .Range("I15").Value <> "?" Then strOtherTimeOff = .Range("I15").Value
-        End With
 
-        If CDbl(strTotalTimeOff) - CDbl(strHolidayTime) > 0 Then
-            btnCreateTimeOffSheet.Visible = True
-        Else
-            btnCreateTimeOffSheet.Visible = False
-        End If
-        '
-        '   END
-        '
-    End If
 
 
 
@@ -260,6 +238,7 @@ EndOfSub:
     Application.EnableEvents = True
     Application.ScreenUpdating = True
 
+
 End Sub
 
 
@@ -269,5 +248,4 @@ End Sub
 '    Application.DisplayCommentIndicator = xlNoIndicator
 '    Application.DisplayAlerts = True
 'End Sub
-
 
