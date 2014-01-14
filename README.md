@@ -2,11 +2,16 @@
 
 This is a tool used internally at Collin County HLS to manage PeopleSoft time for employees.
 
-**The current version is v7.5 which can be downloaded here: http://jakebathman.com/work/timesheetplanner/**
+**The current version is v7.6 which can be downloaded here: http://jakebathman.com/work/timesheetplanner/**
 
 ========
 
 ### Changelog
+
+**v7.6 (released 1/14/2014)**
+* Minor bug and formatting fixed
+* Removed button to import from PeopleSoft, since it's broken
+* Added & removed some employee names
 
 **v7.5 (released 11/25/2013)**
 * Support for accrued time off and generating a form when it happens
