@@ -141,6 +141,7 @@ Sub clearstuff()
     Wend
 
     Sheets("Time Sheet Planner").btnCreateTimeOffSheet.Visible = False
+    Sheets("Time Sheet Planner").btnCreateCompForm.Visible = False
 
     Cells(3, 2).Select
     Call UpdateWorkingForm

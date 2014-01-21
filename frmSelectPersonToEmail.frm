@@ -164,8 +164,8 @@ Private Sub btnSubmit_Click()
                 strName = Me.boxPeople.Value
                 strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
                 boolDone = True
-            Case "Lawana D."
-                strEmail = "ldowns@co.collin.tx.us"
+            Case "Oscar M."
+                strEmail = "omartinez@co.collin.tx.us"
                 strName = Me.boxPeople.Value
                 strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
                 boolDone = True

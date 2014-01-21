@@ -9,6 +9,13 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Option Explicit
 
+Private Declare Function sndPlaySound32 _
+    Lib "winmm.dll" _
+    Alias "sndPlaySoundA" ( _
+        ByVal lpszSoundName As String, _
+        ByVal uFlags As Long) As Long
+
+
 Private Sub btnCreateCompForm_Click()
     
     Call CreateTimeOffForm
@@ -134,6 +141,7 @@ Sub Worksheet_Change(ByVal Target As Range)
                 strM = Right(strTimeInput, 2)
                 strS = "00"
                 If (CDbl(strM) = 7) Or (CDbl(strM) = 22) Or (CDbl(strM) = 37) Or (CDbl(strM) = 52) Then
+                    'Call mPlaySoundForPrompt
                     strS = InputBox("This may round differently with seconds included. How many seconds? (leave blank if :00)", "Seconds?")
                     If strS = vbNullString Or Not IsNumeric(strS) Then strS = "00"
                 End If

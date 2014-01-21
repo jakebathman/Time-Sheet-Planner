@@ -64,7 +64,10 @@ Public Sub EmailTimes()
         Next j
     Next i
 
-    If i < 50 Then boolNoPunchesRunImport = MsgBox("Looks like you don't have any punches to email." & vbCrLf & vbCrLf & "You should add some first.", vbOKOnly)
+    If i < 50 Then
+        boolNoPunchesRunImport = MsgBox("Looks like you don't have any punches to email." & vbCrLf & vbCrLf & "You should add some first.", vbOKOnly)
+        Exit Sub
+    End If
 
 
     If boolNoPunchesRunImport = vbYes Then
