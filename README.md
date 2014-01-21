@@ -8,10 +8,11 @@ This is a tool used internally at Collin County HLS to manage PeopleSoft time fo
 
 ### Changelog
 
-**v7.6 (released 1/14/2014)**
+**v7.6 (released 1/21/2014)**
 * Minor bug and formatting fixed
 * Removed button to import from PeopleSoft, since it's broken
 * Added & removed some employee names
+* Fixed error in email times email address list
 
 **v7.5 (released 11/25/2013)**
 * Support for accrued time off and generating a form when it happens
