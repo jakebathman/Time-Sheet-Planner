@@ -2,11 +2,15 @@
 
 This is a tool used internally at Collin County HLS to manage PeopleSoft time for employees.
 
-**The current version is v7.6 which can be downloaded here: http://jakebathman.com/work/timesheetplanner/**
+**The current version is v7.7 which can be downloaded here: http://jakebathman.com/work/timesheetplanner/**
 
 ========
 
 ### Changelog
+
+**v7.7 (released 4/14/2014)**
+* Minor changes to formatting and formulas on first sheet
+* Updates to staff name list
 
 **v7.6 (released 1/21/2014)**
 * Minor bug and formatting fixed
