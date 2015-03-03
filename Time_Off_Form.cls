@@ -21,7 +21,9 @@ Private Sub boxEmployeeName_Change()
 End Sub
 
 Private Sub btnPrintTimeOffForm_Click()
+    ' Just used for debugging:
     'ActiveSheet.PrintPreview
+    
     Sheets("Time Off Form").PrintOut From:=1, To:=1
 End Sub
 

@@ -11,6 +11,7 @@ Option Explicit
 
 Private Sub Workbook_Open()
     ' My code
+    
     Application.EnableEvents = True
     Application.ScreenUpdating = True
     Application.DisplayCommentIndicator = xlNoIndicator

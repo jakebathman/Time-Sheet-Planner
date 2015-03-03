@@ -12,7 +12,7 @@ Public Sub FindTheSheetInfo()
 
     Dim strCurSheetName As String
     Dim i As Integer
-
+    Dim tmpSheet As Worksheet
 
     intNumberOfSheets = ThisWorkbook.Sheets.Count
 
@@ -21,7 +21,8 @@ Public Sub FindTheSheetInfo()
 
     'main sheet
     For i = 1 To intNumberOfSheets
-        strCurSheetName = Sheets(i).Name
+        Set tmpSheet = ActiveWorkbook.Sheets(i)
+        strCurSheetName = tmpSheet.Name
         frmPickSheetMain.boxListOfSheetsMain.AddItem strCurSheetName
         If strCurSheetName = "Time Sheet Planner" Then
             intSheetNumForMain = i
