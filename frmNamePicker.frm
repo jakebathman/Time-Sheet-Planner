@@ -93,5 +93,6 @@ Private Sub UserForm_Initialize()
     If strCurrentEmployee = "" Or boolRememberCurrentEmployee = False Then frmNamePicker.cmbEmployeeName.ListIndex = 0
 
     frmNamePicker.cmbEmployeeName.SelLength = 0
-    frmNamePicker.btnContinue.SetFocus
+   frmNamePicker.cmbEmployeeName.SetFocus
+    
 End Sub

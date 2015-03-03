@@ -6,7 +6,7 @@ Public Sub showHideTimeOffButtons()
     '   BEGIN
     '
     '   Show/hide "Create Time Off Sheet" button
-    Dim strTotalTimeOff$, strPTOTime$, strCompTime$, strOtherTimeOff$, strHolidayTime$
+    Dim strTotalTimeOff$, strPTOTime$, strCompTime$, strOtherTimeOff$, strHolidayTime$, strClosureTime$
     Dim strEmployeeName$
     Dim dblCompAccrued#, dblRateComp#
 
@@ -18,17 +18,19 @@ Public Sub showHideTimeOffButtons()
     strCompTime = "0"
     strOtherTimeOff = "0"
     strHolidayTime = "0"
+    strClosureTime = "0"
 
     With Sheets("Time Sheet Planner")
         If .Range("I11").Value <> "" And .Range("I11").Value <> "?" Then strTotalTimeOff = Trim(Mid(.Range("I11").Value, 1, InStr(1, .Range("I11").Value, " ", vbTextCompare)))
         If .Range("I12").Value <> "" And .Range("I12").Value <> "?" Then strPTOTime = .Range("I12").Value
         If .Range("I13").Value <> "" And .Range("I13").Value <> "?" Then strCompTime = .Range("I13").Value
         If .Range("I14").Value <> "" And .Range("I14").Value <> "?" Then strHolidayTime = .Range("I14").Value
-        If .Range("I15").Value <> "" And .Range("I15").Value <> "?" Then strOtherTimeOff = .Range("I15").Value
+        If .Range("I15").Value <> "" And .Range("I15").Value <> "?" Then strClosureTime = .Range("I15").Value
+        If .Range("I16").Value <> "" And .Range("I16").Value <> "?" Then strOtherTimeOff = .Range("I16").Value
 
         If .Range("L10").Value <> 0 And .Range("L10").Value > .Range("B1").Value Then dblCompAccrued = (.Range("L10").Value - .Range("B1").Value) * dblRateComp
 
-        If (CDbl(strTotalTimeOff) - CDbl(strHolidayTime) > 0) Then
+        If (CDbl(strTotalTimeOff) - CDbl(strHolidayTime) - CDbl(strClosureTime) > 0) Then
             .btnCreateTimeOffSheet.Visible = True
             .btnCreateCompForm.Visible = False
         ElseIf (dblCompAccrued > 0) Then

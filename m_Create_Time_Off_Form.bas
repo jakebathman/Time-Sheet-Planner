@@ -2,7 +2,7 @@ Attribute VB_Name = "m_Create_Time_Off_Form"
 Option Explicit
 
 Public Sub CreateTimeOffForm()
-    Dim strTotalTimeOff$, strPTOTime$, strCompTime$, strOtherTimeOff$, strHolidayTime$
+    Dim strTotalTimeOff$, strPTOTime$, strCompTime$, strOtherTimeOff$, strHolidayTime$, strClosureTime$
     Dim strEmployeeName$, strTimeOffCodeToUse$
     Dim boolMultipleTimeOffCodes As Boolean
     Dim intCountTimeOffCodes%
@@ -23,7 +23,8 @@ Public Sub CreateTimeOffForm()
         If .Range("I12").Value <> "" And .Range("I12").Value <> "?" Then strPTOTime = .Range("I12").Value: intCountTimeOffCodes = intCountTimeOffCodes + 1
         If .Range("I13").Value <> "" And .Range("I13").Value <> "?" Then strCompTime = .Range("I13").Value: intCountTimeOffCodes = intCountTimeOffCodes + 1
         If .Range("I14").Value <> "" And .Range("I14").Value <> "?" Then strHolidayTime = .Range("I14").Value
-        If .Range("I15").Value <> "" And .Range("I15").Value <> "?" Then strOtherTimeOff = .Range("I15").Value: intCountTimeOffCodes = intCountTimeOffCodes + 1
+        If .Range("I15").Value <> "" And .Range("I15").Value <> "?" Then strHolidayTime = .Range("I15").Value
+        If .Range("I16").Value <> "" And .Range("I16").Value <> "?" Then strOtherTimeOff = .Range("I16").Value: intCountTimeOffCodes = intCountTimeOffCodes + 1
         If .Range("L10").Value <> 0 And .Range("L10").Value > .Range("B1").Value Then dblCompAccrued = (.Range("L10").Value - .Range("B1").Value) * dblRateComp
     End With
 
