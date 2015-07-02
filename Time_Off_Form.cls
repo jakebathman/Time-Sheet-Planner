@@ -17,7 +17,9 @@ Private Sub boxEmployeeName_Change()
         boxEmployeeName.BackColor = &HC0E0FF
     End If
     boxEmployeeName.SelLength = 0
-    Range("C2:D2").Select
+    If ActiveSheet.Name = Sheets(2).Name Then
+        ThisWorkbook.Sheets(2).Range("C2:D2").Select
+    End If
 End Sub
 
 Private Sub btnPrintTimeOffForm_Click()

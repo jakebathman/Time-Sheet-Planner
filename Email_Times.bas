@@ -75,27 +75,27 @@ Public Sub EmailTimes()
         End    ' prevents the rest of this sub from running after import
     End If
 
-    arrPeople(1, 1) = "Jake B."
+    arrPeople(1, 1) = "Carol S."
     arrPeople(2, 1) = "Oscar M."
-    arrPeople(3, 1) = "Carol S."
+    arrPeople(3, 1) = "Amy D."
     arrPeople(4, 1) = "Kelley S."
     arrPeople(5, 1) = "Other A"
     arrPeople(6, 1) = "Other B"
     If Sheets("User Preferences").Cells(13, 2).Value <> "" Then arrPeople(5, 1) = Sheets("User Preferences").Cells(13, 2).Value
     If Sheets("User Preferences").Cells(14, 2).Value <> "" Then arrPeople(6, 1) = Sheets("User Preferences").Cells(14, 2).Value
 
-    arrPeopleAndEmails(1, 1) = "Jake B."
+    arrPeopleAndEmails(1, 1) = "Carol S."
     arrPeopleAndEmails(2, 1) = "Oscar M."
-    arrPeopleAndEmails(3, 1) = "Carol S."
+    arrPeopleAndEmails(3, 1) = "Amy D."
     arrPeopleAndEmails(4, 1) = "Kelley S."
     arrPeopleAndEmails(5, 1) = "Other A"
     arrPeopleAndEmails(6, 1) = "Other B"
     If Sheets("User Preferences").Cells(13, 2).Value <> "" Then arrPeopleAndEmails(5, 1) = Sheets("User Preferences").Cells(13, 2).Value
     If Sheets("User Preferences").Cells(14, 2).Value <> "" Then arrPeopleAndEmails(6, 1) = Sheets("User Preferences").Cells(14, 2).Value
 
-    arrPeopleAndEmails(1, 2) = "jbathman@co.collin.tx.us"
+    arrPeopleAndEmails(1, 2) = "cstrickland@co.collin.tx.us"
     arrPeopleAndEmails(2, 2) = "omartinez@co.collin.tx.us"
-    arrPeopleAndEmails(3, 2) = "cstrickland@co.collin.tx.us"
+    arrPeopleAndEmails(3, 2) = "aldavis@co.collin.tx.us"
     arrPeopleAndEmails(4, 2) = "kstone@co.collin.tx.us"
     arrPeopleAndEmails(5, 2) = ""
     arrPeopleAndEmails(6, 2) = ""

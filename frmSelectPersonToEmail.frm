@@ -174,11 +174,11 @@ Private Sub btnSubmit_Click()
                 strName = Me.boxPeople.Value
                 strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
                 strEmail = "cstrickland@co.collin.tx.us"
-            Case "Jake B."
+            Case "Amy D."
                 boolDone = True
-                strName = "Jake"
+                strName = Me.boxPeople.Value
                 strName = Left(strName, InStr(1, strName, " ", vbTextCompare) - 1)
-                strEmail = "jbathman@co.collin.tx.us"
+                strEmail = "aldavis@co.collin.tx.us"
             Case arrPeopleAndEmails(5, 1)
                 If Me.boxOtherEmail.Value <> "" And Me.boxOtherName.Value <> "" Then
                     boolDone = True
